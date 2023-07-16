@@ -1,11 +1,11 @@
 html{font-size: 20px;}
-body{font-family: 'Inter', sans-serif;line-height: 1;color: #000;}
+body{font-family: 'Inter', sans-serif;line-height: 1;color: #000; font-weight: 400;}
 *{padding: 0; margin: 0; border: 0;}
 *,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
 input,button,textarea{font-family: inherit;}
 button{cursor: pointer;}
 ul li{list-style: none;}
-h1,h2,h3,h4,h5,h6{font-size:inherit;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 a,a:visited{text-decoration: none;}
 p{width: auto} 
 

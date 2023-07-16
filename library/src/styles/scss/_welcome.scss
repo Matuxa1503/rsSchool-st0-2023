@@ -1,0 +1,22 @@
+.welcome {
+	background: url("../../../img/headerAndWelcome/Welcome.png");
+	height: 91.5vh;
+	&__pos {
+		width: 600px;
+		height: 220px;
+		padding: 220px 0 160px 0;
+	}
+
+	&__title {
+		font-family: 'Forum';
+		font-size: 2rem;
+		padding: 35px 40px;
+		line-height: 50px;
+		letter-spacing: 3px;
+		text-align: center;
+		text-transform: uppercase;
+		color: #fff;
+		background-color: #0C0C0E;
+	}
+}
+

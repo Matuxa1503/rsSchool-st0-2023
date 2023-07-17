@@ -1,5 +1,8 @@
 .welcome {
-	background: url("../../../img/headerAndWelcome/Welcome.png");
+	width: 100%;
+	background-image: linear-gradient(rgba(12, 12, 14, 1),rgba(18, 18, 21, 0.1)), url("../../../img/headerAndWelcome/Welcome.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 	height: 91.5vh;
 	&__pos {
 		width: 600px;

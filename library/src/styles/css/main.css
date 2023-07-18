@@ -40,14 +40,34 @@ a, a:visited {
   text-decoration: none;
 }
 
-p {
-  width: auto;
-}
-
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.defPos {
+  margin: 20px 0 40px;
+}
+
+.defaultTitle {
+  display: inline-block;
+  position: relative;
+  font-family: "Forum";
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 70px;
+  letter-spacing: 2px;
+}
+.defaultTitle::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: 20px;
+  z-index: 1;
+  background-color: #0C0C0E;
 }
 
 .header {
@@ -125,11 +145,48 @@ p {
 .welcome__title {
   font-family: "Forum";
   font-size: 2rem;
-  padding: 35px 40px;
+  padding: 35px 40px 35px;
   line-height: 50px;
   letter-spacing: 3px;
   text-align: center;
   text-transform: uppercase;
   color: #fff;
   background-color: #0C0C0E;
+}
+
+.about {
+  text-align: center;
+}
+
+.about__paragraph {
+  margin-bottom: 2%;
+}
+
+.about__slider {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5%;
+}
+
+.about__pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.about__pagination-content {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.about__pagination-circle {
+  width: 16px;
+  height: 16px;
+  margin: 5px auto 0;
+  border-radius: 50%;
+  background-color: #0C0C0E;
+}
+
+.active {
+  background-color: #BB945F;
 }

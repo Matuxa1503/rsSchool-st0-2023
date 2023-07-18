@@ -1,0 +1,36 @@
+.about {
+	text-align: center;
+}
+
+.about__paragraph {
+	margin-bottom: 2%;
+}
+
+.about__slider {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2.5%;
+}
+
+.about__pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.about__pagination-content {
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+}
+
+.about__pagination-circle {
+	width: 16px;
+	height: 16px;
+	margin: 5px auto 0;
+	border-radius: 50%;
+	background-color: #0C0C0E;
+}
+
+.active {
+	background-color: #BB945F;
+}

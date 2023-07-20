@@ -47,7 +47,7 @@ a, a:visited {
 }
 
 .defPos {
-  margin: 20px 0 56px;
+  padding: 20px 0 40px;
 }
 
 .defaultTitle {
@@ -182,9 +182,6 @@ a, a:visited {
   background-color: #BB945F;
 }
 
-.favorites {
-  margin-top: 3.8%;
-}
 .favorites__paragraph {
   margin: -0.35% 0 3.2%;
 }
@@ -367,4 +364,48 @@ a, a:visited {
 }
 .coffeShop__food:last-child {
   margin-bottom: 0;
+}
+
+.contacts__content {
+  display: flex;
+  justify-content: space-between;
+}
+.contacts__title {
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin-bottom: 9.6%;
+}
+.contacts .secondTitle {
+  margin-bottom: 7.5%;
+}
+.contacts__phones {
+  margin: 12.3% 0;
+}
+.contacts__phone {
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  margin-bottom: 7.8%;
+}
+.contacts__phone a {
+  color: inherit;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.contacts__phone a:hover {
+  color: #BB945F;
+}
+.contacts__mail {
+  letter-spacing: 2px;
+}
+.contacts__mail a {
+  color: inherit;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contacts__mail a:hover {
+  color: #BB945F;
+}
+.contacts__map {
+  margin-top: -10px;
 }

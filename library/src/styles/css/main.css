@@ -47,7 +47,7 @@ a, a:visited {
 }
 
 .defPos {
-  margin: 20px 0 40px;
+  margin: 20px 0 56px;
 }
 
 .defaultTitle {
@@ -314,4 +314,57 @@ a, a:visited {
   position: absolute;
   bottom: -1px;
   right: -38px;
+}
+
+.coffeShop__paragraph {
+  letter-spacing: 2px;
+  line-height: 40px;
+  text-align: center;
+  margin: -10px 0 3%;
+}
+.coffeShop__sell {
+  display: flex;
+  justify-content: space-between;
+}
+.coffeShop__title {
+  font-family: "Forum";
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 10.7%;
+  color: #BB945F;
+}
+.coffeShop__drink {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13.7%;
+}
+.coffeShop__drink:last-child {
+  margin-bottom: 0;
+}
+.coffeShop__dish-name {
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.coffeShop__dish-sell {
+  font-family: "Forum";
+}
+.coffeShop__dish-sell::before {
+  content: "";
+  display: inline-block;
+  width: 100px;
+  margin: 0 64px 0 60px;
+  height: 1px;
+  background-color: #BB945F;
+  vertical-align: middle;
+}
+.coffeShop__desserts {
+  text-align: right;
+}
+.coffeShop__food {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 13%;
+}
+.coffeShop__food:last-child {
+  margin-bottom: 0;
 }

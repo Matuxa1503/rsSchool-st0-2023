@@ -1,0 +1,85 @@
+.coffeShop {
+	&__paragraph {
+		letter-spacing: 2px;
+		line-height: 40px;
+		text-align: center;
+		margin: -10px 0 3%;
+	}
+
+	&__sell {
+		display: flex;
+		justify-content: space-between;
+	}
+
+		&__title {
+		font-family: 'Forum';
+		font-size: 2rem;
+		letter-spacing: 2px;
+		margin-bottom: 10.7%;
+		color: #BB945F;
+	}
+
+		&__drink {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 13.7%;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__dish-name {
+		letter-spacing: 2px;
+		text-transform: capitalize;
+	}
+
+	&__dish-sell {
+		font-family: 'Forum';
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 100px;
+			margin: 0 64px 0 60px;
+			height: 1px;
+			background-color: #BB945F;
+			vertical-align: middle;
+		}
+	}
+
+	&__desserts {
+		text-align: right;
+	}
+
+	&__food {
+		display: flex;
+		justify-content: right;
+		margin-bottom: 13%;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

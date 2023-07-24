@@ -8,6 +8,10 @@ ul li{list-style: none;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 a,a:visited{text-decoration: none;}
 
+.wrapper {
+	margin: 0 auto;
+}
+
 .container {
 	max-width: 1440px;
 	margin: 0 auto;

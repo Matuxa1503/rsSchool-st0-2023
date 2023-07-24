@@ -40,6 +40,10 @@ a, a:visited {
   text-decoration: none;
 }
 
+.wrapper {
+  margin: 0 auto;
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -159,6 +163,7 @@ a, a:visited {
 .about__slider {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 2.5%;
 }
 .about__pagination {
@@ -408,4 +413,107 @@ a, a:visited {
 }
 .contacts__map {
   margin-top: -10px;
+}
+
+.libraryCard__container {
+  display: flex;
+  justify-content: space-between;
+}
+.libraryCard__card-title {
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  text-align: center;
+  margin-bottom: 4.9%;
+}
+.libraryCard__card-container {
+  border: 3px solid #BB945F;
+  text-align: center;
+  padding: 19px 18px 26px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.libraryCard__form {
+  width: 560px;
+  background-color: #BB945F;
+  margin-bottom: 4%;
+  padding: 28px 20px 23px 19px;
+}
+.libraryCard__form-title {
+  color: #000;
+  font-family: "Forum";
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  text-align: left;
+  margin-bottom: 6%;
+}
+.libraryCard__form form {
+  display: flex;
+  flex-direction: column;
+}
+.libraryCard__form-input {
+  font-size: 1.5rem;
+  font-family: "Forum";
+  border: 1px solid #fff;
+  color: #BB945F;
+  letter-spacing: 0.6px;
+  margin-bottom: 4.8%;
+  padding: 16px 20px;
+  border-radius: 10px;
+}
+.libraryCard__form-input:last-child {
+  margin-bottom: 0;
+}
+.libraryCard__form-input:focus {
+  border-color: #000;
+  outline: 0;
+}
+.libraryCard__form-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  padding: 10px 40px;
+  transition: 0.3s;
+}
+.libraryCard__form-btn:hover {
+  border-color: #BB945F;
+  background-color: #BB945F;
+}
+
+.libraryCard__login {
+  text-align: right;
+}
+.libraryCard__login-title {
+  font-family: "Forum";
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  margin: -1px 0 6.7%;
+}
+.libraryCard__login-paragraph {
+  color: #000;
+  line-height: 40px;
+  letter-spacing: 0.4px;
+  max-width: 456px;
+  margin-bottom: 8%;
+}
+.libraryCard__login-btn {
+  font-size: 0.5rem;
+  margin-right: 14px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.libraryCard__login-btn:last-child {
+  margin-right: 0;
+  padding: 8px 19px;
+}
+.libraryCard__login-btn:hover {
+  border-color: #BB945F;
+  background-color: #BB945F;
 }

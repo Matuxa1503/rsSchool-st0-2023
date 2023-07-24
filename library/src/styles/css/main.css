@@ -1,0 +1,576 @@
+html {
+  font-size: 20px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1;
+  color: #000;
+  font-weight: 400;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+.wrapper {
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.defPos {
+  padding: 20px 0 40px;
+}
+
+.defaultTitle {
+  display: block;
+  font-family: "Forum";
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.defaultTitle::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 1px;
+  margin: 20px auto 48px;
+  background-color: #0C0C0E;
+}
+
+.header {
+  height: 90px;
+  background-color: #0C0C0E;
+}
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}
+.header__logo {
+  font-family: "Forum";
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+.header__right {
+  display: flex;
+  align-items: center;
+}
+
+.nav__list {
+  display: flex;
+  margin-right: 40px;
+}
+.nav__item {
+  margin-right: 30px;
+  text-align: center;
+}
+.nav__item:last-child {
+  margin-right: 0;
+}
+.nav__link {
+  position: relative;
+  color: #fff;
+  transition: 0.3s;
+}
+.nav__link:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: 3px;
+  z-index: 1;
+  background-color: #BB945F;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.nav__link:hover {
+  color: #BB945F;
+}
+.nav__link:hover::after {
+  opacity: 1;
+}
+
+.header__icon {
+  cursor: pointer;
+}
+
+.welcome {
+  width: 100%;
+  background-image: linear-gradient(rgb(12, 12, 14), rgba(18, 18, 21, 0.1)), url("../../../img/headerAndWelcome/Welcome.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 91.5vh;
+}
+.welcome__pos {
+  width: 600px;
+  height: 220px;
+  padding: 220px 0 160px 0;
+}
+.welcome__title {
+  font-family: "Forum";
+  font-size: 2rem;
+  padding: 35px 40px 35px;
+  line-height: 50px;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #0C0C0E;
+}
+
+.about {
+  text-align: center;
+}
+.about__paragraph {
+  margin-bottom: 2.2%;
+}
+.about__slider {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2.5%;
+}
+.about__pagination {
+  display: flex;
+  justify-content: center;
+}
+.about__pagination-content {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+.about__pagination-circle {
+  width: 16px;
+  height: 16px;
+  margin: 5px auto 0;
+  border-radius: 50%;
+  background-color: #0C0C0E;
+}
+
+.active {
+  background-color: #BB945F;
+}
+
+.favorites__paragraph {
+  margin: -0.35% 0 3.2%;
+}
+.favorites__radioButtons {
+  display: flex;
+  margin-bottom: 2.8%;
+}
+.favorites__btn {
+  position: relative;
+  margin-right: 6.2%;
+}
+.favorites__btn:last-child {
+  margin-right: 0;
+}
+.favorites__btn input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: absolute;
+}
+.favorites__btn input:checked + label {
+  font-weight: 700;
+}
+.favorites__btn input:checked + .radio-label::after {
+  opacity: 1;
+}
+
+.radio-label {
+  cursor: pointer;
+  padding: 5px 5px 5px 36px;
+}
+.radio-label:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  border: 2px solid black;
+  border-radius: 50%;
+  z-index: 1;
+}
+.radio-label::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 2;
+  display: block;
+  width: 7px;
+  height: 7px;
+  background-color: #000;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.favorites__books {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 257px;
+}
+
+.noneDisplay {
+  display: none;
+}
+
+.favorites__book {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 552px;
+  height: 555px;
+  padding: 1.6% 1.04% 1.04% 1.4%;
+  border: 1px solid #000000;
+}
+.favorites__book__subtitle {
+  font-family: "Forum";
+  letter-spacing: 2px;
+}
+.favorites__book__subtitle::after {
+  content: "";
+  display: block;
+  margin: 2% 0 3.8%;
+  width: 60px;
+  height: 1px;
+  background-color: #BB945F;
+}
+.favorites__book__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 3.8%;
+  letter-spacing: 2px;
+}
+.favorites__book__title span {
+  text-transform: uppercase;
+}
+.favorites__book__paragraph {
+  width: 69%;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  line-height: 40px;
+  text-transform: capitalize;
+}
+.favorites__book__btn {
+  width: 75px;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 9px 0;
+  margin-top: auto;
+  border: 1px solid #000;
+  background-color: #fff;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.favorites__book__btn:hover:not(:disabled) {
+  background-color: #BB945F;
+  border: 1px solid #BB945F;
+}
+.favorites__book__btn:disabled {
+  color: #BB945F;
+  border: 1px solid #BB945F;
+  cursor: default;
+}
+.favorites__book__img {
+  position: absolute;
+  bottom: -1px;
+  right: -38px;
+}
+
+.coffeShop__paragraph {
+  letter-spacing: 2px;
+  line-height: 40px;
+  text-align: center;
+  margin: -10px 0 3%;
+}
+.coffeShop__sell {
+  display: flex;
+  justify-content: space-between;
+}
+.coffeShop__title {
+  font-family: "Forum";
+  font-size: 2rem;
+  letter-spacing: 2px;
+  margin-bottom: 10.7%;
+  color: #BB945F;
+}
+.coffeShop__drink {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 13.7%;
+}
+.coffeShop__drink:last-child {
+  margin-bottom: 0;
+}
+.coffeShop__dish-name {
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.coffeShop__dish-sell {
+  font-family: "Forum";
+}
+.coffeShop__dish-sell::before {
+  content: "";
+  display: inline-block;
+  width: 100px;
+  margin: 0 64px 0 60px;
+  height: 1px;
+  background-color: #BB945F;
+  vertical-align: middle;
+}
+.coffeShop__desserts {
+  text-align: right;
+}
+.coffeShop__food {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 13%;
+}
+.coffeShop__food:last-child {
+  margin-bottom: 0;
+}
+
+.contacts__content {
+  display: flex;
+  justify-content: space-between;
+}
+.contacts__title {
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin-bottom: 9.6%;
+}
+.contacts .secondTitle {
+  margin-bottom: 7.5%;
+}
+.contacts__phones {
+  margin: 12.3% 0;
+}
+.contacts__phone {
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  margin-bottom: 7.8%;
+}
+.contacts__phone a {
+  color: inherit;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.contacts__phone a:hover {
+  color: #BB945F;
+}
+.contacts__mail {
+  letter-spacing: 2px;
+}
+.contacts__mail a {
+  color: inherit;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contacts__mail a:hover {
+  color: #BB945F;
+}
+.contacts__map {
+  margin-top: -10px;
+}
+
+.libraryCard__container {
+  display: flex;
+  justify-content: space-between;
+}
+.libraryCard__card-title {
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  text-align: center;
+  margin-bottom: 4.9%;
+}
+.libraryCard__card-container {
+  border: 3px solid #BB945F;
+  text-align: center;
+  padding: 19px 18px 26px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.libraryCard__form {
+  width: 560px;
+  background-color: #BB945F;
+  margin-bottom: 4%;
+  padding: 28px 20px 23px 19px;
+}
+.libraryCard__form-title {
+  color: #000;
+  font-family: "Forum";
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  text-align: left;
+  margin-bottom: 6%;
+}
+.libraryCard__form form {
+  display: flex;
+  flex-direction: column;
+}
+.libraryCard__form-input {
+  font-size: 1.5rem;
+  font-family: "Forum";
+  border: 1px solid #fff;
+  color: #BB945F;
+  letter-spacing: 0.6px;
+  margin-bottom: 4.8%;
+  padding: 16px 20px;
+  border-radius: 10px;
+}
+.libraryCard__form-input:last-child {
+  margin-bottom: 0;
+}
+.libraryCard__form-input:focus {
+  border-color: #000;
+  outline: 0;
+}
+.libraryCard__form-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  padding: 10px 40px;
+  transition: 0.3s;
+}
+.libraryCard__form-btn:hover {
+  border-color: #BB945F;
+  background-color: #BB945F;
+}
+
+.libraryCard__login {
+  text-align: right;
+}
+.libraryCard__login-title {
+  font-family: "Forum";
+  font-size: 1.5rem;
+  letter-spacing: 0.6px;
+  margin: -1px 0 6.7%;
+}
+.libraryCard__login-paragraph {
+  color: #000;
+  line-height: 40px;
+  letter-spacing: 0.4px;
+  max-width: 456px;
+  margin-bottom: 8%;
+}
+.libraryCard__login-btn {
+  font-size: 0.5rem;
+  margin-right: 14px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 2px;
+  border: 1px solid #0C0C0E;
+  background-color: #fff;
+  transition: 0.3s;
+}
+.libraryCard__login-btn:last-child {
+  margin-right: 0;
+  padding: 8px 19px;
+}
+.libraryCard__login-btn:hover {
+  border-color: #BB945F;
+  background-color: #BB945F;
+}
+
+.info {
+  background: #0C0C0E;
+}
+.info__container {
+  padding: 20px 0 44px;
+}
+.info__block {
+  font-size: 0.75rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.4%;
+}
+.info__paragraph a {
+  line-height: 20px;
+  color: inherit;
+}
+.info__week {
+  text-align: right;
+  line-height: 20px;
+}
+.info__social {
+  display: flex;
+  justify-content: space-between;
+  width: 102px;
+}
+.info__title a {
+  position: relative;
+  left: 13.5%;
+  color: #fff;
+}
+.info__username a {
+  color: #fff;
+}
+
+.infoBlockTwo {
+  margin-top: 0.7%;
+}
+.infoBlockTwo::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 2% 0 3%;
+  background-color: #fff;
+}
+
+.infoBlockThree {
+  font-size: 1rem;
+  margin-bottom: 0;
+  line-height: 20px;
+  letter-spacing: 2px;
+}

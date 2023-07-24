@@ -1,5 +1,6 @@
 html {
   font-size: 20px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -516,4 +517,60 @@ a, a:visited {
 .libraryCard__login-btn:hover {
   border-color: #BB945F;
   background-color: #BB945F;
+}
+
+.info {
+  background: #0C0C0E;
+}
+.info__container {
+  padding: 20px 0 44px;
+}
+.info__block {
+  font-size: 0.75rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.4%;
+}
+.info__paragraph a {
+  line-height: 20px;
+  color: inherit;
+}
+.info__week {
+  text-align: right;
+  line-height: 20px;
+}
+.info__social {
+  display: flex;
+  justify-content: space-between;
+  width: 102px;
+}
+.info__title a {
+  position: relative;
+  left: 13.5%;
+  color: #fff;
+}
+.info__username a {
+  color: #fff;
+}
+
+.infoBlockTwo {
+  margin-top: 0.7%;
+}
+.infoBlockTwo::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 2% 0 3%;
+  background-color: #fff;
+}
+
+.infoBlockThree {
+  font-size: 1rem;
+  margin-bottom: 0;
+  line-height: 20px;
+  letter-spacing: 2px;
 }

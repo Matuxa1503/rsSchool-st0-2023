@@ -6,8 +6,12 @@
 	<link rel="stylesheet" href="src/styles/css/main.css">
 	<link href="https://fonts.googleapis.com/css?family=Inter:regular,700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Forum:regular&display=swap" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">	
 	<title>Library</title>
 </head>
+
 <body>
 	<div class="wrapper">
 		<header class="header">
@@ -18,19 +22,19 @@
 						<nav class="nav">
 							<ul class="nav__list">
 								<li class="nav__item">
-									<a href="#" class="nav__link">About</a>
+									<a href="#about" class="nav__link">About</a>
 								</li>
 								<li class="nav__item">
-									<a href="#" class="nav__link">Favorites</a>
+									<a href="#favorites" class="nav__link">Favorites</a>
 								</li>
 								<li class="nav__item">
-									<a href="#" class="nav__link">Coffee shop</a>
+									<a href="#coffeeShop" class="nav__link">Coffee shop</a>
 								</li>
 								<li class="nav__item">
-									<a href="#" class="nav__link">Contacts</a>
+									<a href="#contacts" class="nav__link">Contacts</a>
 								</li>
 								<li class="nav__item">
-									<a href="#" class="nav__link">Library Card</a>
+									<a href="#libraryCard" class="nav__link">Library Card</a>
 								</li>
 							</ul>
 						</nav>
@@ -38,7 +42,6 @@
 							<img src="img/headerAndWelcome/icon_profile.png" alt="">
 						</div>
 					</div>	<!-- /header__right -->
-
 				</div>	<!-- /header__wrapper -->
 			</div>	<!-- /container -->
 		</header>
@@ -50,7 +53,7 @@
 				</div>
 			</section>
 
-			<section class="about defPos">
+			<section class="about defPos" id="about">
 				<div class="container">
 					<div class="section__title">
 						<h2 class="defaultTitle">About</h2>
@@ -81,7 +84,7 @@
 				</div>	<!-- /container -->
 			</section>
 
-			<section class="favorites defPos">
+			<section class="favorites defPos" id="favorites">
 				<div class="container">
 					<div class="section__title">
 						<h2 class="defaultTitle">Favorites</h2>
@@ -263,7 +266,7 @@
 				</div>	<!-- /container -->
 			</section>
 
-			<section class="coffeShop defPos">
+			<section class="coffeShop defPos" id="coffeeShop">
 				<div class="container">
 					<div class="section__title">
 						<h2 class="defaultTitle">Coffee Shop</h2>
@@ -300,7 +303,6 @@
 								<div class="coffeShop__dish-sell">$2</div>
 							</div>
 						</div>
-						
 						<div class="coffeShop__desserts">
 							<h3 class="coffeShop__title">Desserts & Cakes</h3>
 							<div class="coffeShop__food">
@@ -328,12 +330,11 @@
 								<div class="coffeShop__dish-sell">$14</div>
 							</div>
 						</div>
-
 					</div>	<!-- /coffeShop__sell -->
 				</div>	<!-- /container -->
 			</section>
 
-			<section class="contacts defPos">
+			<section class="contacts defPos" id="contacts">
 				<div class="container">
 					<div class="section__title">
 						<h2 class="defaultTitle">Our Contacts</h2>
@@ -356,7 +357,7 @@
 				</div>	<!-- /container -->
 			</section>
 
-			<section class="libraryCard defPos">
+			<section class="libraryCard defPos" id="libraryCard">
 				<div class="container">
 					<div class="section__title">
 						<h2 class="defaultTitle">Digital Library Cards</h2>
@@ -375,7 +376,6 @@
 								<button class="libraryCard__form-btn">Check the card</button>
 							</div>	<!-- /libraryCard__card-container -->
 						</div>	<!-- /libraryCard__card -->
-
 						<div class="libraryCard__login">
 							<h4 class="libraryCard__login-title">Get a reader card</h4>
 							<p class="libraryCard__login-paragraph">You will be able to see a reader card after logging into account or you can register a new account</p>
@@ -385,8 +385,50 @@
 					</div>	<!-- /libraryCard__container -->
 				</div>	<!-- /container -->
 			</section>
-
 		</main>
+
+		<footer class="info">
+			<div class="container">
+				<div class="info__container">
+					<div class="info__block">
+						<p class="info__paragraph">
+							<a href="https://goo.gl/maps/rxhB4FiFVPCqJSij8" target="_blank">286 Cadman Plaza, New York,<br>NY 11238, United States</a>
+						</p>
+						<p class="info__week">Mon - Fri <br>08:00 am - 07:00 pm</p>
+					</div>
+					<div class="info__block infoBlockTwo">
+						<ul class="info__social">
+							<li>
+								<a href="https://twitter.com/elonmusk" target="_blank">
+									<img src="img/footer/twitter.svg" alt="">
+								</a>
+							</li>
+							<li>
+								<a href="https://www.instagram.com/porsche/" target="_blank">
+									<img src="img/footer/instagram.svg" alt="">
+								</a>
+							</li>
+							<li>
+								<a href="https://www.facebook.com/porsche/" target="_blank">
+									<img src="img/footer/facebook.svg" alt="">
+								</a>
+							</li>
+						</ul>
+						<p class="info__week">Sat - Sun <br>10:00 am - 06:00 pm</p>
+					</div>
+					<div class="info__block infoBlockThree">
+						<div class="info__year">2023</div>
+						<div class="info__title">
+							<a href=" https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a>
+						</div>
+						<div class="info__username">
+							<a href="https://github.com/Matuxa1503" target="_blank">Matuxa1503</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>	<!-- /container -->
+		</footer>
 	</div>	<!-- /wrapper -->
 </body>
 </html>

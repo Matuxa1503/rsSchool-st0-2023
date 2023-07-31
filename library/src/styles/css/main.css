@@ -132,21 +132,19 @@ a, a:visited {
 }
 
 .welcome {
-  width: 100%;
-  background-image: linear-gradient(rgb(12, 12, 14), rgba(18, 18, 21, 0.1)), url("../../../img/headerAndWelcome/Welcome.png");
+  background-image: linear-gradient(rgb(12, 12, 14), rgba(18, 18, 21, 0.1)), url("../../../img/headerAndWelcome/welcome.png");
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
-  height: 91.5vh;
 }
 .welcome__pos {
   width: 600px;
-  height: 220px;
   padding: 220px 0 160px 0;
 }
 .welcome__title {
   font-family: "Forum";
   font-size: 2rem;
-  padding: 35px 40px 35px;
+  padding: 35px 40px 35px 0;
   line-height: 50px;
   letter-spacing: 3px;
   text-align: center;
@@ -159,7 +157,7 @@ a, a:visited {
   text-align: center;
 }
 .about__paragraph {
-  margin-bottom: 2.2%;
+  margin: -0.5% 0 1.2%;
 }
 .about__slider {
   display: flex;

@@ -1,0 +1,48 @@
+@media screen and (max-width: 1024px) {
+	.nav {
+		display: none;
+	}
+
+	// burger menu
+	.header__burger-icon {
+		display: block;
+		position: relative;
+		width: 45px;
+		height: 20px;
+		margin: 0 0 0 40px;
+		z-index: 50;
+		cursor: pointer;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 10%;
+			width: 100%;
+			background-color: #fff;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: -6%;
+			height: 10%;
+			width: 100%;
+			background-color: #fff;
+		}
+	}
+
+	.span__burger {
+		position: absolute;
+		top: 48%;
+		left: 0;
+		height: 10%;
+		width: 100%;
+		background-color: #fff;
+	}
+
+} // end media 1100px
+
+

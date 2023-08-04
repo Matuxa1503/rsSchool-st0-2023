@@ -3,23 +3,45 @@
 
 	&__paragraph {
 		margin: -0.5% 0 1.2%;
+		line-height: 40px;
+	}
+
+	&__slider-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 2.5%;
 	}
 
 	&__slider {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
+		gap: 0 5px;
 		flex-wrap: wrap;
-		margin-bottom: 2.5%;
+		overflow: hidden;
+		height: 560px;
+	}
+
+	&__arrow {
+		display: none;
 	}
 
 	&__pagination {
 		display: flex;
 		justify-content: center;
+
 		&-content {
 			width: 26px;
 			height: 26px;
 			cursor: pointer;
+
+			&:nth-child(4),
+			&:nth-child(5) {
+				display: none;
+			}
 		}
+		
 		&-circle {
 			width: 16px;
 			height: 16px;
@@ -33,3 +55,7 @@
 .active {
 	background-color: #BB945F;
 }
+
+
+
+

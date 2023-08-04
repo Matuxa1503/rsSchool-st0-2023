@@ -158,12 +158,25 @@ a, a:visited {
 }
 .about__paragraph {
   margin: -0.5% 0 1.2%;
+  line-height: 40px;
+}
+.about__slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5%;
 }
 .about__slider {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  gap: 0 5px;
   flex-wrap: wrap;
-  margin-bottom: 2.5%;
+  overflow: hidden;
+  height: 560px;
+}
+.about__arrow {
+  display: none;
 }
 .about__pagination {
   display: flex;
@@ -173,6 +186,9 @@ a, a:visited {
   width: 26px;
   height: 26px;
   cursor: pointer;
+}
+.about__pagination-content:nth-child(4), .about__pagination-content:nth-child(5) {
+  display: none;
 }
 .about__pagination-circle {
   width: 16px;
@@ -573,6 +589,24 @@ a, a:visited {
   letter-spacing: 2px;
 }
 
+@media screen and (max-width: 1400px) {
+  .about__slider {
+    justify-content: space-around;
+  }
+  .about__pagination-content:nth-child(4) {
+    display: block;
+  }
+  .favorites__books {
+    justify-content: space-between;
+    gap: 40px 0;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .favorites__books {
+    gap: 40px 60px;
+    justify-content: center;
+  }
+}
 @media screen and (max-width: 1024px) {
   .nav {
     display: none;
@@ -611,5 +645,35 @@ a, a:visited {
     height: 10%;
     width: 100%;
     background-color: #fff;
+  }
+  .favorites__paragraph {
+    margin-bottom: 6%;
+  }
+  .favorites__radioButtons {
+    margin-bottom: 5.5%;
+    gap: 0 42px;
+  }
+}
+@media screen and (max-width: 944px) {
+  .about__paragraph {
+    margin-bottom: 2.5%;
+  }
+  .about__slider {
+    width: 450px;
+    margin: 0 45px;
+  }
+  .about__arrow {
+    display: inline-block;
+    position: relative;
+    top: 20px;
+  }
+  .about__pagination-content:nth-child(5) {
+    display: block;
+  }
+  .favorites__books {
+    margin-left: -37px;
+  }
+  .favorites__book {
+    padding: 3% 2.04% 1.7% 2.4%;
   }
 }

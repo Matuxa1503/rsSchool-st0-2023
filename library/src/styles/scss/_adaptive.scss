@@ -79,6 +79,33 @@
 			gap: 0 42px;
 		}
 	}
+
+	.coffeShop {
+		&__paragraph {
+			margin-bottom: 6%;
+			& span {
+				margin-left: -4px;
+			}
+		}
+		&__sell {
+			flex-direction: column;
+			gap: 50px 0;
+			margin-bottom: 2%;
+		}
+
+		&__drinkables {
+			width: 441px;
+		}
+	}
+
+	.dessertsMargin {
+		margin-bottom: 6.5%;
+	}
+	
+	.foodMargin {
+		margin-bottom: 8.2%;
+	}
+
 } // end media 1024px
 
 

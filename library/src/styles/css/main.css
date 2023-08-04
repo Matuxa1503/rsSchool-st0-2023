@@ -653,6 +653,26 @@ a, a:visited {
     margin-bottom: 5.5%;
     gap: 0 42px;
   }
+  .coffeShop__paragraph {
+    margin-bottom: 6%;
+  }
+  .coffeShop__paragraph span {
+    margin-left: -4px;
+  }
+  .coffeShop__sell {
+    flex-direction: column;
+    gap: 50px 0;
+    margin-bottom: 2%;
+  }
+  .coffeShop__drinkables {
+    width: 441px;
+  }
+  .dessertsMargin {
+    margin-bottom: 6.5%;
+  }
+  .foodMargin {
+    margin-bottom: 8.2%;
+  }
 }
 @media screen and (max-width: 944px) {
   .about__paragraph {

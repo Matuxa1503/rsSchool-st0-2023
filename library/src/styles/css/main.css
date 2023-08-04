@@ -673,6 +673,26 @@ a, a:visited {
   .foodMargin {
     margin-bottom: 8.2%;
   }
+  .contacts__content {
+    flex-wrap: wrap;
+    gap: 110px 0;
+  }
+  .contacts__map {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .libraryCard__container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px 0;
+  }
+  .libraryCard__login {
+    text-align: center;
+  }
+  .libraryCard__login-paragraph {
+    max-width: 600px;
+    margin-bottom: 7%;
+  }
 }
 @media screen and (max-width: 944px) {
   .about__paragraph {

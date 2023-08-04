@@ -112,8 +112,9 @@
 			gap: 110px 0;
 		}
 
-		&__map {
+		&__map img {
 			max-width: 100%;
+			height: auto;
 			margin: 0 auto;
 		}
 	}
@@ -133,6 +134,14 @@
 			max-width: 600px;
 			margin-bottom: 7%;
 		}
+	}
+
+	.infoBlockTwo::after {
+		margin: 4% 0 6%;
+	}
+
+	.info__title a {
+		left: 4.5%;
 	}
 } // end media 1024px
 

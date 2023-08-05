@@ -1,0 +1,233 @@
+@media screen and (max-width: 1400px) {
+	.about {
+		&__slider {
+			justify-content: space-around;
+		}
+		
+		&__pagination-content:nth-child(4) { 
+			display: block;
+		}
+	}
+
+	.favorites__books {
+		justify-content: space-between;
+		gap: 40px 0;
+	}
+} // end media 1400px
+
+
+@media screen and (max-width: 1200px) {
+	.favorites__books {
+		gap: 40px 60px;
+		justify-content: center;
+	}
+}// end media 1200px
+
+
+@media screen and (max-width: 1024px) {
+	// nav menu
+	.nav {
+		position: fixed;
+		width: 332px;
+		height: 580px;
+		top: 0;
+		right: -100%;
+		transition-duration: 0.5s;
+		background: #000;
+
+		&.activeMenu {
+			right: 0;
+		}
+		
+		&__list {
+			display: block;
+			padding: 110px 0 70px;
+			margin: 0 auto;
+		}
+		
+		&__item {
+			margin: 0 0 30px 0;
+			line-height: 50px;
+		}
+		
+		&__link:hover::after {
+			display: none;
+		}
+	}
+
+	// burger menu
+	.header__burger-icon {
+		display: block;
+		position: relative;
+		width: 45px;
+		height: 20px;
+		margin: 0 -5px 0 32px;
+		z-index: 50;
+		cursor: pointer;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 10%;
+			width: 100%;
+			background-color: #fff;
+			transition: all 0.2s ease 0.1s;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			bottom: -6%;
+			height: 10%;
+			width: 100%;
+			background-color: #fff;
+			transition: all 0.2s ease 0.1s;
+		}
+	}
+
+	.span__burger {
+		position: absolute;
+		top: 48%;
+		left: 0;
+		height: 10%;
+		width: 100%;
+		background-color: #fff;
+		transition: all 0.2s ease 0.1s;
+		transform: scale(1) rotate(0deg);
+	}
+
+	.header__burger-icon.activeIcon{
+		&::before {
+			top: 50%;
+			transform: rotate(-45deg) translate(0px, -50%);
+		}
+		
+		& span {
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			bottom: 50%;
+			transform: rotate(45deg) translate(0px, 50%);
+		}
+	}
+	// --------------
+
+	.favorites {
+		&__paragraph {
+			margin-bottom: 6%;
+		}
+
+		&__radioButtons {
+			margin-bottom: 5.5%;
+			gap: 0 42px;
+		}
+	}
+
+	.coffeShop {
+		&__paragraph {
+			margin-bottom: 6%;
+			& span {
+				margin-left: -4px;
+			}
+		}
+		&__sell {
+			flex-direction: column;
+			gap: 50px 0;
+			margin-bottom: 2%;
+		}
+
+		&__drinkables {
+			width: 441px;
+		}
+	}
+
+	.dessertsMargin {
+		margin-bottom: 6.5%;
+	}
+	
+	.foodMargin {
+		margin-bottom: 8.2%;
+	}
+
+	.contacts {
+		&__content {
+			flex-wrap: wrap;
+			gap: 121px 0;
+		}
+
+		&__map img {
+			max-width: 100%;
+			height: auto;
+			margin: 0 0 0 10px;
+		}
+	}
+
+	.libraryCard {
+		&__container {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 25px 0;
+		}
+
+		&__login {
+			text-align: center;
+		}
+
+		&__login-paragraph {
+			max-width: 600px;
+			margin-bottom: 6.5%;
+		}
+	}
+
+	.infoBlockTwo {
+		margin-top: 1.7%;
+		&::after {
+			margin: 4% 0 6%;
+		}
+	}
+
+	.info__title a {
+		left: 4.5%;
+	}
+} // end media 1024px
+
+
+@media screen and (max-width: 944px) {
+	.about {
+		&__paragraph {
+			margin-bottom: 2.5%;
+		}
+
+		&__slider {
+			width: 450px;
+			margin: 0 45px;
+		}
+
+		&__arrow {
+			display: inline-block;
+			cursor: pointer;
+			position: relative;
+			top: 20px;
+		}
+
+		&__pagination-content:nth-child(5) {
+			display: block;
+		}
+	}
+
+	.favorites {
+		&__books {
+			margin-left: -37px;
+		}
+
+		&__book {
+			padding: 3% 2.04% 1.7% 2.4%;
+		}
+	}
+
+}// end media 944px
+

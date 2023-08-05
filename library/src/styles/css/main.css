@@ -71,6 +71,10 @@ a, a:visited {
   background-color: #0C0C0E;
 }
 
+.bodyHidden {
+  overflow: hidden;
+}
+
 .header {
   height: 90px;
   background-color: #0C0C0E;
@@ -129,6 +133,7 @@ a, a:visited {
 
 .header__icon {
   cursor: pointer;
+  z-index: 10;
 }
 
 .welcome {
@@ -138,8 +143,8 @@ a, a:visited {
   background-size: cover;
 }
 .welcome__pos {
-  width: 600px;
-  padding: 220px 0 160px 0;
+  width: 585px;
+  padding: 220px 0 160px 16px;
 }
 .welcome__title {
   font-family: "Forum";
@@ -158,12 +163,25 @@ a, a:visited {
 }
 .about__paragraph {
   margin: -0.5% 0 1.2%;
+  line-height: 40px;
+}
+.about__slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5%;
 }
 .about__slider {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  gap: 0 5px;
   flex-wrap: wrap;
-  margin-bottom: 2.5%;
+  overflow: hidden;
+  height: 560px;
+}
+.about__arrow {
+  display: none;
 }
 .about__pagination {
   display: flex;
@@ -173,6 +191,9 @@ a, a:visited {
   width: 26px;
   height: 26px;
   cursor: pointer;
+}
+.about__pagination-content:nth-child(4), .about__pagination-content:nth-child(5) {
+  display: none;
 }
 .about__pagination-circle {
   width: 16px;
@@ -571,4 +592,180 @@ a, a:visited {
   margin-bottom: 0;
   line-height: 20px;
   letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1400px) {
+  .about__slider {
+    justify-content: space-around;
+  }
+  .about__pagination-content:nth-child(4) {
+    display: block;
+  }
+  .favorites__books {
+    justify-content: space-between;
+    gap: 40px 0;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .favorites__books {
+    gap: 40px 60px;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .nav {
+    position: fixed;
+    width: 332px;
+    height: 580px;
+    top: 0;
+    right: -100%;
+    transition-duration: 0.5s;
+    background: #000;
+  }
+  .nav.activeMenu {
+    right: 0;
+  }
+  .nav__list {
+    display: block;
+    padding: 110px 0 70px;
+    margin: 0 auto;
+  }
+  .nav__item {
+    margin: 0 0 30px 0;
+    line-height: 50px;
+  }
+  .nav__link:hover::after {
+    display: none;
+  }
+  .header__burger-icon {
+    display: block;
+    position: relative;
+    width: 45px;
+    height: 20px;
+    margin: 0 -5px 0 32px;
+    z-index: 50;
+    cursor: pointer;
+  }
+  .header__burger-icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #fff;
+    transition: all 0.2s ease 0.1s;
+  }
+  .header__burger-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6%;
+    height: 10%;
+    width: 100%;
+    background-color: #fff;
+    transition: all 0.2s ease 0.1s;
+  }
+  .span__burger {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #fff;
+    transition: all 0.2s ease 0.1s;
+    transform: scale(1) rotate(0deg);
+  }
+  .header__burger-icon.activeIcon::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+  }
+  .header__burger-icon.activeIcon span {
+    transform: rotate(45deg);
+  }
+  .header__burger-icon.activeIcon::after {
+    bottom: 50%;
+    transform: rotate(45deg) translate(0px, 50%);
+  }
+  .favorites__paragraph {
+    margin-bottom: 6%;
+  }
+  .favorites__radioButtons {
+    margin-bottom: 5.5%;
+    gap: 0 42px;
+  }
+  .coffeShop__paragraph {
+    margin-bottom: 6%;
+  }
+  .coffeShop__paragraph span {
+    margin-left: -4px;
+  }
+  .coffeShop__sell {
+    flex-direction: column;
+    gap: 50px 0;
+    margin-bottom: 2%;
+  }
+  .coffeShop__drinkables {
+    width: 441px;
+  }
+  .dessertsMargin {
+    margin-bottom: 6.5%;
+  }
+  .foodMargin {
+    margin-bottom: 8.2%;
+  }
+  .contacts__content {
+    flex-wrap: wrap;
+    gap: 121px 0;
+  }
+  .contacts__map img {
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 0 10px;
+  }
+  .libraryCard__container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px 0;
+  }
+  .libraryCard__login {
+    text-align: center;
+  }
+  .libraryCard__login-paragraph {
+    max-width: 600px;
+    margin-bottom: 6.5%;
+  }
+  .infoBlockTwo {
+    margin-top: 1.7%;
+  }
+  .infoBlockTwo::after {
+    margin: 4% 0 6%;
+  }
+  .info__title a {
+    left: 4.5%;
+  }
+}
+@media screen and (max-width: 944px) {
+  .about__paragraph {
+    margin-bottom: 2.5%;
+  }
+  .about__slider {
+    width: 450px;
+    margin: 0 45px;
+  }
+  .about__arrow {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: 20px;
+  }
+  .about__pagination-content:nth-child(5) {
+    display: block;
+  }
+  .favorites__books {
+    margin-left: -37px;
+  }
+  .favorites__book {
+    padding: 3% 2.04% 1.7% 2.4%;
+  }
 }

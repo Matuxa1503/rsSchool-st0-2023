@@ -134,6 +134,8 @@ a, a:visited {
 .header__icon {
   cursor: pointer;
   z-index: 10;
+  width: 26px;
+  height: 26px;
 }
 
 .welcome {
@@ -169,7 +171,7 @@ a, a:visited {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2.5%;
+  margin-bottom: 5.5%;
 }
 .about__slider {
   position: relative;
@@ -620,15 +622,14 @@ a, a:visited {
     top: 0;
     right: -100%;
     transition-duration: 0.5s;
-    background: #000;
+    background: #0C0C0E;
   }
   .nav.activeMenu {
     right: 0;
   }
   .nav__list {
     display: block;
-    padding: 110px 0 70px;
-    margin: 0 auto;
+    margin: 100px 100px 70px 100px;
   }
   .nav__item {
     margin: 0 0 30px 0;
@@ -642,7 +643,7 @@ a, a:visited {
     position: relative;
     width: 45px;
     height: 20px;
-    margin: 0 -5px 0 32px;
+    margin: 0 0 0 42px;
     z-index: 50;
     cursor: pointer;
   }

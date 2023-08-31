@@ -123,11 +123,19 @@
 	.favorites {
 		&__paragraph {
 			margin-bottom: 6%;
+			background: #fff;
+			top: 0;  
+			z-index: 100;  
+			width: 100%;  
 		}
 
 		&__radioButtons {
 			margin-bottom: 5.5%;
 			gap: 0 42px;
+			background: #fff;
+			top: 0;  
+			z-index: 100;  
+			width: 100%;  
 		}
 	}
 

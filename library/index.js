@@ -30,7 +30,7 @@ window.addEventListener('click', function(e) {
 // end burger menu
 
 
-// Slider
+// Slider About
 // 1. Получаем наш слайдер 
 const carousel = document.querySelector('.about__slider-line');
 // стрелки
@@ -151,3 +151,84 @@ arrowIcons.forEach(icon => {
 	}
 });
 // end Slider
+
+
+
+// Slider Favorites
+const radioBtns = document.querySelectorAll('.favorites__btn');
+const favBooks = document.querySelectorAll('.favorites__books');
+const favParagraph = document.querySelector('.favorites__paragraph');
+const favWrapperBtns = document.querySelector('.favorites__radioButtons');
+const favTitle = document.querySelector('.favorites__title');
+
+
+window.addEventListener('scroll', () => {
+	if (window.innerWidth < 945) {
+		if (window.scrollY > 1775 && window.scrollY < 4100) {
+			favTitle.style.marginBottom = 180 + 'px';
+			favParagraph.style.position = 'fixed';
+			favParagraph.style.paddingTop = 15 + 'px';
+			favParagraph.style.paddingBottom = 25 + 'px';
+
+			favWrapperBtns.style.position = 'fixed';
+			favWrapperBtns.style.top = 55 + 'px';
+			favWrapperBtns.style.paddingBottom = 15 + 'px';
+		} else {
+			favTitle.style.marginBottom = 0 + 'px';
+			favParagraph.style.position = 'relative';
+			favParagraph.style.padding = 0 + 'px';
+
+			favWrapperBtns.style.position = 'relative';
+			favWrapperBtns.style.top = 0 + 'px';
+			favWrapperBtns.style.padding = 0 + 'px';
+		}
+	}
+});
+
+radioBtns.forEach(radio => {
+	radio.addEventListener('click', () => {
+
+		favBooks.forEach(books => {
+
+			function animFavBlock (allBooks, currentBooks) {
+				allBooks.classList.add('transition-fade');
+
+				allBooks.addEventListener('animationend', animationEvent => {
+					if (animationEvent.animationName == 'fade') {
+						for (books of favBooks) {
+							books.classList.remove('transition-fade');
+							books.classList.add('noneDisplay');
+						}
+						currentBooks.classList.remove('noneDisplay');
+						currentBooks.classList.add('transition-appearance');
+					}
+				});
+				
+				currentBooks.addEventListener('animationend', () => {
+					for (books of favBooks) {
+						books.classList.remove('transition-appearance');
+					}
+				});
+			}
+
+			if (radio.id == 'winterBtn' && !radio.children[0].checked) {
+				animFavBlock(books, favBooks[0]);
+			}
+
+			if (radio.id == 'springBtn' && !radio.children[0].checked) {
+				animFavBlock(books, favBooks[1]);
+			}
+
+			if (radio.id == 'summerBtn' && !radio.children[0].checked) {
+				animFavBlock(books, favBooks[2]);
+			}
+
+			if (radio.id == 'autumnBtn' && !radio.children[0].checked) {
+				animFavBlock(books, favBooks[3]);
+			}
+
+		});  // radionBtns.forEach
+	});  // radio.addEventListener
+});  // favBooks.forEach
+
+//end Slider Favorites

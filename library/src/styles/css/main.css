@@ -205,6 +205,7 @@ a, a:visited {
   display: none;
 }
 .about__pagination-circle {
+  display: block;
   width: 16px;
   height: 16px;
   margin: 5px auto 0;
@@ -345,6 +346,32 @@ a, a:visited {
   position: absolute;
   bottom: -1px;
   right: -38px;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes appearance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.transition-fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.transition-appearance {
+  animation-name: appearance;
+  animation-duration: 1.5s;
 }
 
 .coffeShop__paragraph {
@@ -701,10 +728,18 @@ a, a:visited {
   }
   .favorites__paragraph {
     margin-bottom: 6%;
+    background: #fff;
+    top: 0;
+    z-index: 100;
+    width: 100%;
   }
   .favorites__radioButtons {
     margin-bottom: 5.5%;
     gap: 0 42px;
+    background: #fff;
+    top: 0;
+    z-index: 100;
+    width: 100%;
   }
   .coffeShop__paragraph {
     margin-bottom: 6%;

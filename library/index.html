@@ -46,6 +46,26 @@
 			<p class="modal__register__login">Already have an account? <button>Login</button></p>
 		</div>	<!-- /modal__register -->
 
+		<div class="modal__login noneDisplay">
+			<div class="modal__login__title">Login</div>
+			<svg class="modal__login__icon" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+				<path d="M2 16.8507L17 2.00003" stroke="#0C0C0E" stroke-width="3"/>
+				<path d="M2 2.14926L17 17" stroke="#0C0C0E" stroke-width="3"/>
+			</svg>
+			<form id="modal__login__form" action="#">
+				<div class="modal__login__content">
+					<div class="modal__login__subtitle">E-mail or readers card</div>
+					<input data-required="true" type="text" class="modal__login__input">
+				</div>
+				<div class="modal__login__content">
+					<div class="modal__login__subtitle">Password</div>
+					<input data-password-length="8" type="password" class="modal__login__input">
+				</div>
+				<button type="submit" class="modal__login__btn">Log In</button>
+			</form>
+			<p class="modal__login__register">Don’t have an account? <button>Register</button></p>
+		</div>	<!-- /modal__login -->
+
 		<header class="header">
 			<div class="container">
 				<div class="header__wrapper">
@@ -452,7 +472,7 @@
 							<h4 class="libraryCard__login-title">Get a reader card</h4>
 							<p class="libraryCard__login-paragraph">You will be able to see a reader card after logging into account or you can register a new account</p>
 							<button class="libraryCard__login-btn register__btn">Sign Up</button>
-							<button class="libraryCard__login-btn">Log in</button>
+							<button class="libraryCard__login-btn login__btn">Log in</button>
 						</div>
 					</div>	<!-- /libraryCard__container -->
 				</div>	<!-- /container -->

@@ -1,6 +1,9 @@
 // для запрета скролла страницы
 const bodyHidden = document.querySelector('body');
 
+// делает opacity body
+const bcgOpacity = document.querySelector('.bcgOpacity');
+
 
 // Drop Menu
 const headerIcon = document.querySelector('.header__icon');
@@ -19,17 +22,20 @@ window.addEventListener('click', function(e) {
 
 
 // REGISTER USER
-
 	// Modal Register
-// делает opacity body
-const bcgOpacity = document.querySelector('.bcgOpacity');
-
 // Получаем наш элемент(кнопку) в дропменю Register
 const registerDropMenu = document.querySelector('.dropMenu__register');
 
 // Модалка с крестиком
 const modalRegister = document.querySelector('.modal__register');
 const modalRegisterIcon = document.querySelector('.modal__register__icon');
+
+// Кнопка login в register. Прячем modal register, показываем modal login
+const loginInRegister = document.querySelector('.modal__register__login>button');
+loginInRegister.addEventListener('click', () => {
+	showModalRegister()
+	showModalLogin()
+});
 
 // Кнопка Sign Up в секции Digital Library Cards
 const registerButton = document.querySelector('.register__btn');
@@ -125,6 +131,9 @@ function validation(form) {
 	return result
 }
 
+
+const headerIconUser = document.querySelector('.header__iconUser');
+const headerDropMenuUser = document.querySelector('.header__dropMenuUser');
 // 1.При событии submit удаляем действие по умолчанию(e.preventDefault()) и делаем следующее
 document.getElementById('modal__register__form').addEventListener('submit', function(e) {
 	e.preventDefault();
@@ -166,7 +175,6 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 		});
 
 		// 7.5 Получаем 2 буквы для записи их в иконку и иконку по умолчанию прячем
-		const headerIconUser = document.querySelector('.header__iconUser');
 		let p = document.createElement('p');
 		p.innerHTML = `${name[0]}${surname[0]}`
 		headerIconUser.append(p);
@@ -175,6 +183,77 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 	}
 });
 // end REGISTER USER
+
+// При авторизации клик по иконке
+headerIconUser.addEventListener('click', () => {
+	headerDropMenuUser.classList.toggle('noneDisplay');
+});
+
+window.addEventListener('click', function(e) {
+	if (!headerIconUser.contains(e.target) && !headerDropMenuUser.contains(e.target)) {
+		headerDropMenuUser.classList.add('noneDisplay');
+	}
+});
+
+// LOGIN USER
+
+	// Modal login
+// Получаем наш элемент(кнопку) в дропменю Login
+const loginDropMenu = document.querySelector('.dropMenu__login');
+
+// Модалка с крестиком
+const modalLogin = document.querySelector('.modal__login');
+const modalLoginIcon = document.querySelector('.modal__login__icon');
+
+// Кнопка Sign Up в секции Digital Library Cards
+const loginButton = document.querySelector('.login__btn');
+
+// Кнопки buy в favorites
+const favoritesButton = document.querySelectorAll('.favorites__book__btn');
+
+// Кнопка register в login. Прячем modal login, показываем modal register
+const RegisterInLogin = document.querySelector('.modal__login__register>button');
+RegisterInLogin.addEventListener('click', () => {
+	showModalLogin()
+	showModalRegister()
+});
+
+// Клик
+loginDropMenu.addEventListener('click', showModalLogin);
+loginButton.addEventListener('click', showModalLogin);
+favoritesButton.forEach(currentBtn => currentBtn.addEventListener('click', showModalLogin));
+
+
+// Показывать или прятать модалку, добавлять фон под модалкой или убирать, запрещать скролл или разрешать
+function showModalLogin() {
+	modalLogin.classList.toggle('noneDisplay');
+	bcgOpacity.classList.toggle('activeOpacity');
+	bodyHidden.classList.toggle('bodyHiddenModal');
+}
+
+// Клик на иконку крестика в модалке переключает классы в функции
+modalLoginIcon.addEventListener('click', () => {
+	showModalLogin()
+});
+
+// Клик за пределами модалки (то есть по bcgOpacity) переключает классы в функции 
+bcgOpacity.addEventListener('click', function(e) {
+	if (!modalLogin.classList.contains('noneDisplay')) {
+		showModalLogin()
+	}
+});
+
+
+document.getElementById('modal__login__form').addEventListener('submit', function(e) {
+	e.preventDefault();
+
+//2.Вызываем функцию validation и ей передаем нашу форму через this  ДОДЕЛАТЬ!!!
+	if (validation(this) == true) {
+		console.log('Валидация пройдена')
+	}
+});
+// end REGISTER USER
+
 
 
 // Burger menu

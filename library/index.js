@@ -1,30 +1,209 @@
+// для запрета скролла страницы
+const bodyHidden = document.querySelector('body');
+
+
+// Drop Menu
+const headerIcon = document.querySelector('.header__icon');
+const headerDropMenu = document.querySelector('.header__dropMenu');
+
+headerIcon.addEventListener('click', () => {
+	headerDropMenu.classList.toggle('noneDisplay');
+});
+
+window.addEventListener('click', function(e) {
+	if (!headerIcon.contains(e.target) && !headerDropMenu.contains(e.target)) {
+		headerDropMenu.classList.add('noneDisplay');
+	}
+});
+// end Drop Menu
+
+
+// REGISTER USER
+
+	// Modal Register
+// делает opacity body
+const bcgOpacity = document.querySelector('.bcgOpacity');
+
+// Получаем наш элемент(кнопку) в дропменю Register
+const registerDropMenu = document.querySelector('.dropMenu__register');
+
+// Модалка с крестиком
+const modalRegister = document.querySelector('.modal__register');
+const modalRegisterIcon = document.querySelector('.modal__register__icon');
+
+// Кнопка Sign Up в секции Digital Library Cards
+const registerButton = document.querySelector('.register__btn');
+
+// Клик
+registerDropMenu.addEventListener('click', showModalRegister);
+registerButton.addEventListener('click', showModalRegister);
+
+// Показывать или прятать модалку, добавлять фон под модалкой или убирать, запрещать скролл или разрешать
+function showModalRegister() {
+	modalRegister.classList.toggle('noneDisplay');
+	bcgOpacity.classList.toggle('activeOpacity');
+	bodyHidden.classList.toggle('bodyHiddenModal');
+}
+
+// Клик на иконку крестика в модалке переключает классы в функции
+modalRegisterIcon.addEventListener('click', () => {
+	showModalRegister()
+});
+
+// Клик за пределами модалки (то есть по bcgOpacity) переключает классы в функции 
+bcgOpacity.addEventListener('click', function(e) {
+	if (!modalRegister.classList.contains('noneDisplay')) {
+		showModalRegister()
+	}
+});
+
+
+	// Проверка формы на валидность
+
+	// 3. После вызова validation cоздаем переменную let result = true и ниже начинаем проверять каждый input на валидность
+function validation(form) {
+
+	// 5. Удаление ошибок. Получаем input.parentNode (то есть родителя нашего инпута, а это .modal__register__content в html) и если у него есть класс ошибки
+	// errorInput тогда удаляем наш label в котором написана причина ошибки и сам errorInput
+	function removeError(input) {
+		const parent = input.parentNode;
+		
+		if (parent.classList.contains('errorInput')) {
+			parent.querySelector('.errorLabelModal').remove();
+			parent.classList.remove('errorInput');
+		}
+	}
+
+	// 5. Создание ошибок. Передаем инпут и название ошибки, создаем label, ему добавляем класс errorLabelModal(и присваиваем ему текст ошибки)
+	function createError(input, text) {
+		const errorLabel = document.createElement('label');
+		errorLabel.classList.add('errorLabelModal');
+		errorLabel.textContent = text;
+
+		//получаем родителя инпута и красим границу инпута в красный, добавляем как ребенка под инпутом наш label c ошибкой
+		const parent = input.parentNode;
+		parent.classList.add('errorInput');
+		parent.append(errorLabel);
+	}
+
+	let result = true;
+
+	// 4. Удаляем если были изначально ошибки 
+	form.querySelectorAll('input').forEach(input => {
+		removeError(input);
+
+		//4.1 Проверка имени и фамилии через дата атрибут в html
+		if (input.dataset.required) {
+			//4.2 Удаляем если были изначально ошибки и проверяем если инпут не соответсвует условию, тогда создаем для него ошибку createError() и присваем result = false
+			removeError(input);
+			if (input.value == '') {
+				createError(input, 'Поле не заполнено')
+				result = false;
+			}
+		}
+
+			// Проверка почты через дата атрибут в html
+		if (input.dataset.checkEmail) {
+			removeError(input);
+			if (!input.value.includes(input.dataset.checkEmail) && input.value.length < 2) {
+				createError(input, `Неккоректный адрес электронной почты`)
+				result = false;
+			}
+		}
+
+			// Проверка для пароля через дата атрибут в html
+		if (input.dataset.passwordLength) {
+			removeError(input);
+			if (input.value.length < input.dataset.passwordLength) {
+				createError(input, `Пароль должен быть не короче ${input.dataset.passwordLength} символов`)
+				result = false;
+			}
+		}
+
+	});
+	// 6.Возвращаем result
+	return result
+}
+
+// 1.При событии submit удаляем действие по умолчанию(e.preventDefault()) и делаем следующее
+document.getElementById('modal__register__form').addEventListener('submit', function(e) {
+	e.preventDefault();
+
+//2.Вызываем функцию validation и ей передаем нашу форму через this 
+	if (validation(this) == true) {
+		// 7. Если result вернул true
+		// 7.2 создаем наш объект и возвращаем его неявно
+		function User(input1, input2, input3, input4, card) {
+			this.name = input1;
+			this.surname = input2;
+			this.email = input3;
+			this.password = input4;
+			this.cardNumber = card;
+		}
+
+		// 7.1 Получаем наши инпуты с данными и записываем в переменные, создаем рандомный Card number и передаем все данные в new User
+		const futureObject = this.querySelectorAll('input');
+		let name = futureObject[0].value;
+		let surname = futureObject[1].value;
+		let email = futureObject[2].value;
+		let password = futureObject[3].value;
+
+		// Card number
+		let cardNumber = '';
+		while (cardNumber.length < 9) {
+		cardNumber += Math.floor(Math.random() * 16).toString(16)
+		}
+		// ---------
+
+		let user = new User(name, surname, email, password, cardNumber);
+		
+		// 7.3 Записываем его в localStorage
+		localStorage.setItem('user', JSON.stringify(user));
+
+		// 7.4 После записи в localStorage чистим наши инпуты
+		futureObject.forEach(input => {
+			input.value = '';
+		});
+
+		// 7.5 Получаем 2 буквы для записи их в иконку и иконку по умолчанию прячем
+		const headerIconUser = document.querySelector('.header__iconUser');
+		let p = document.createElement('p');
+		p.innerHTML = `${name[0]}${surname[0]}`
+		headerIconUser.append(p);
+		headerIcon.classList.add('noneDisplay');
+		headerIconUser.classList.remove('noneDisplay');
+	}
+});
+// end REGISTER USER
+
+
 // Burger menu
-const bodyHidden = document.querySelector("body");
-const iconMenu = document.querySelector(".header__burger-icon");
-const navList = document.querySelector(".nav__list");
-const navMenu = document.querySelector(".nav");
+const iconMenu = document.querySelector('.header__burger-icon');
+const navList = document.querySelector('.nav__list');
+const navMenu = document.querySelector('.nav');
 
 if (iconMenu) {
-	iconMenu.addEventListener("click", function(e) {
-		iconMenu.classList.toggle("activeIcon");
-		navMenu.classList.toggle("activeMenu");
-		bodyHidden.classList.toggle("bodyHidden");
+	iconMenu.addEventListener('click', function(e) {
+		iconMenu.classList.toggle('activeIcon');
+		navMenu.classList.toggle('activeMenu');
+		bodyHidden.classList.toggle('bodyHidden');
 	});
+	headerDropMenu.classList.add('noneDisplay');
 };
 
 if (navList) {
-	navList.addEventListener("click", function(e) {
-		iconMenu.classList.remove("activeIcon");
-		navMenu.classList.remove("activeMenu");
-		bodyHidden.classList.remove("bodyHidden");
+	navList.addEventListener('click', function(e) {
+		iconMenu.classList.remove('activeIcon');
+		navMenu.classList.remove('activeMenu');
+		bodyHidden.classList.remove('bodyHidden');
 	});
 };
 
 window.addEventListener('click', function(e) {
 	if (!iconMenu.contains(e.target) && !navMenu.contains(e.target)) {
-		navMenu.classList.remove("activeMenu");
-		iconMenu.classList.remove("activeIcon");
-		bodyHidden.classList.remove("bodyHidden");
+		navMenu.classList.remove('activeMenu');
+		iconMenu.classList.remove('activeIcon');
+		bodyHidden.classList.remove('bodyHidden');
 	}
 });
 // end burger menu
@@ -230,5 +409,7 @@ radioBtns.forEach(radio => {
 		});  // radionBtns.forEach
 	});  // radio.addEventListener
 });  // favBooks.forEach
-
 //end Slider Favorites
+
+
+

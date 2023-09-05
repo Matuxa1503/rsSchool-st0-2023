@@ -75,6 +75,102 @@ a, a:visited {
   overflow: hidden;
 }
 
+.bodyHiddenModal {
+  overflow: hidden;
+}
+
+.noneDisplay {
+  display: none;
+}
+
+.bcgOpacity {
+  display: none;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1000%;
+  opacity: 0.5;
+  transition: 0.5s;
+  z-index: 50;
+  background-color: #000;
+}
+
+.activeOpacity {
+  display: block;
+  transition: 0.5s;
+}
+
+.modal__register {
+  position: fixed;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -51%);
+  padding: 20px 25px;
+  z-index: 1000;
+  width: 250px;
+  height: auto;
+  background: #fff;
+}
+.modal__register__title {
+  text-align: center;
+  font-family: "Forum";
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.modal__register__icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.modal__register__content {
+  margin-bottom: 10px;
+}
+.modal__register__subtitle {
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+.modal__register__input {
+  width: 200px;
+  border: 1px solid #BB945F;
+}
+.modal__register__btn {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 9px 15px;
+  margin: 10px 0;
+  border-radius: 2px;
+  background-color: #fff;
+  border: 1px solid #0C0C0E;
+}
+.modal__register__login {
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  font-size: 10px;
+}
+.modal__register__login button {
+  color: #0C0C0E;
+  background-color: #fff;
+  font-size: 10px;
+  margin-left: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
+}
+
+.errorInput .modal__register__input {
+  border-color: red;
+}
+
+.errorLabelModal {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  color: red;
+}
+
 .header {
   height: 90px;
   background-color: #0C0C0E;
@@ -132,10 +228,95 @@ a, a:visited {
 }
 
 .header__icon {
+  position: relative;
   cursor: pointer;
   z-index: 10;
   width: 26px;
   height: 26px;
+}
+
+.header__dropMenu {
+  width: 80px;
+  height: 115px;
+  position: absolute;
+  top: 65px;
+  right: 18px;
+  background-color: #fff;
+  text-align: center;
+  padding: 5px 0 16px;
+}
+.header__dropMenu__title {
+  position: relative;
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.header__dropMenu__title::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 3px 0 0 20px;
+  z-index: 1;
+  background-color: #BB945F;
+}
+.header__dropMenu__text {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.header__iconUser {
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+  background-color: #fff;
+  border-radius: 50px;
+}
+
+.header__iconUser p {
+  margin-top: 5px;
+  text-align: center;
+  color: #BB945F;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.header__dropMenuUser {
+  width: 80px;
+  height: 115px;
+  position: absolute;
+  top: 65px;
+  right: 18px;
+  background-color: #fff;
+  text-align: center;
+  padding: 5px 0 16px;
+}
+.header__dropMenuUser__title {
+  position: relative;
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.header__dropMenuUser__title::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 3px 0 0 20px;
+  z-index: 1;
+  background-color: #BB945F;
+}
+.header__dropMenuUser__text {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
 .welcome {
@@ -675,6 +856,9 @@ a, a:visited {
   }
   .nav__link:hover::after {
     display: none;
+  }
+  .header__dropMenu {
+    right: 105px;
   }
   .header__burger-icon {
     display: block;

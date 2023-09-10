@@ -3,8 +3,6 @@ const bodyHidden = document.querySelector('body');
 
 // делает opacity body
 const bcgOpacity = document.querySelector('.bcgOpacity');
-
-
 // Drop Menu
 const headerIcon = document.querySelector('.header__icon');
 const headerDropMenu = document.querySelector('.header__dropMenu');
@@ -20,7 +18,16 @@ window.addEventListener('click', function(e) {
 });
 // end Drop Menu
 
+// let loginUser;
+// if (localStorage.getItem('loginUser') == 'true') {
+// 	loginUser = true;
+// } else {
+// 	loginUser = false;
+// }
 
+// 1 этап
+function beforeLogin () {
+if (!localStorage.getItem('loginUser') || localStorage.getItem('loginUser') == 'false') {
 // REGISTER USER
 	// Modal Register
 // Получаем наш элемент(кнопку) в дропменю Register
@@ -132,8 +139,6 @@ function validation(form) {
 }
 
 
-const headerIconUser = document.querySelector('.header__iconUser');
-const headerDropMenuUser = document.querySelector('.header__dropMenuUser');
 // 1.При событии submit удаляем действие по умолчанию(e.preventDefault()) и делаем следующее
 document.getElementById('modal__register__form').addEventListener('submit', function(e) {
 	e.preventDefault();
@@ -160,7 +165,7 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 		// Card number
 		let cardNumber = '';
 		while (cardNumber.length < 9) {
-		cardNumber += Math.floor(Math.random() * 16).toString(16)
+		cardNumber += Math.floor(Math.random() * 16).toString(16).toUpperCase();
 		}
 		// ---------
 
@@ -168,35 +173,18 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 		
 		// 7.3 Записываем его в localStorage
 		localStorage.setItem('user', JSON.stringify(user));
-
+		localStorage.setItem('loginUser', 'true');
 		// 7.4 После записи в localStorage чистим наши инпуты
 		futureObject.forEach(input => {
 			input.value = '';
 		});
-
-		// 7.5 Получаем 2 буквы для записи их в иконку и иконку по умолчанию прячем
-		let p = document.createElement('p');
-		p.innerHTML = `${name[0]}${surname[0]}`
-		headerIconUser.append(p);
-		headerIcon.classList.add('noneDisplay');
-		headerIconUser.classList.remove('noneDisplay');
+		showModalRegister()
+		afterLogin()
 	}
 });
 // end REGISTER USER
 
-// При авторизации клик по иконке
-headerIconUser.addEventListener('click', () => {
-	headerDropMenuUser.classList.toggle('noneDisplay');
-});
-
-window.addEventListener('click', function(e) {
-	if (!headerIconUser.contains(e.target) && !headerDropMenuUser.contains(e.target)) {
-		headerDropMenuUser.classList.add('noneDisplay');
-	}
-});
-
 // LOGIN USER
-
 	// Modal login
 // Получаем наш элемент(кнопку) в дропменю Login
 const loginDropMenu = document.querySelector('.dropMenu__login');
@@ -223,7 +211,6 @@ loginDropMenu.addEventListener('click', showModalLogin);
 loginButton.addEventListener('click', showModalLogin);
 favoritesButton.forEach(currentBtn => currentBtn.addEventListener('click', showModalLogin));
 
-
 // Показывать или прятать модалку, добавлять фон под модалкой или убирать, запрещать скролл или разрешать
 function showModalLogin() {
 	modalLogin.classList.toggle('noneDisplay');
@@ -243,17 +230,81 @@ bcgOpacity.addEventListener('click', function(e) {
 	}
 });
 
-
 document.getElementById('modal__login__form').addEventListener('submit', function(e) {
 	e.preventDefault();
 
-//2.Вызываем функцию validation и ей передаем нашу форму через this  ДОДЕЛАТЬ!!!
+//2.Вызываем функцию validation и ей передаем нашу форму через this
 	if (validation(this) == true) {
-		console.log('Валидация пройдена')
+		const inputsLogin = document.querySelectorAll('.modal__login__input');
+		let res = 0
+		inputsLogin.forEach(input => {
+			if (input.value == JSON.parse(localStorage.getItem('user')).cardNumber || input.value == JSON.parse(localStorage.getItem('user')).email) {
+				res++
+			}
+			if (input.value == JSON.parse(localStorage.getItem('user')).password) {
+				res++
+			}
+		});
+		if (res == 2) {
+			localStorage.setItem('loginUser', true)
+			showModalLogin()
+			afterLogin()
+		}
 	}
 });
-// end REGISTER USER
+// end LOGIN USER
+}
+} // end function beforeLogin
+beforeLogin()
 
+// muravskiy.03@mail.ru
+
+
+// USER AFTER LOGIN
+function afterLogin() {
+	if (localStorage.getItem('loginUser') == 'true') {
+	// При авторизации клик по иконке
+	const headerIconUser = document.querySelector('.header__iconUser');
+	const headerDropMenuUser = document.querySelector('.header__dropMenuUser');
+	const headerDropMenuUserTitle = document.querySelector('.header__dropMenuUser__title');
+
+	headerIconUser.addEventListener('click', () => {
+		headerDropMenuUser.classList.toggle('noneDisplay');
+	});
+
+	window.addEventListener('click', function(e) {
+		if (!headerIconUser.contains(e.target) && !headerDropMenuUser.contains(e.target)) {
+			headerDropMenuUser.classList.add('noneDisplay');
+		}
+	});
+
+	headerDropMenuUserTitle.innerHTML = JSON.parse(localStorage.getItem('user')).cardNumber;
+
+	let nameAndSurname = JSON.parse(localStorage.getItem('user')).name + " " + JSON.parse(localStorage.getItem('user')).surname;
+	headerIconUser.setAttribute('title', nameAndSurname);
+
+
+
+	// 7.5 Получаем 2 буквы для записи их в иконку и иконку по умолчанию прячем
+			let p = document.createElement('p');
+			p.innerHTML = JSON.parse(localStorage.getItem('user')).name[0] + JSON.parse(localStorage.getItem('user')).surname[0];
+			headerIconUser.append(p);
+			headerIcon.classList.add('noneDisplay');
+			headerIconUser.classList.remove('noneDisplay');
+			
+			const logoutDropMenuUser = document.querySelector('.dropMenuUser__logOut');
+			logoutDropMenuUser.addEventListener('click', () => {
+				localStorage.setItem('loginUser', false);
+				headerIcon.classList.remove('noneDisplay');
+				headerIconUser.removeChild(p);
+				headerIconUser.classList.add('noneDisplay');
+				headerDropMenuUser.classList.add('noneDisplay');
+				beforeLogin()
+			});
+	} 
+}  // end function afterLogin
+// end USER AFTER LOGIN
+afterLogin()
 
 
 // Burger menu

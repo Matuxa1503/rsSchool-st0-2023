@@ -88,6 +88,7 @@ a,a:visited{text-decoration: none;}
 
 	&__icon {
 		position: absolute;
+		cursor: pointer;
 		top: 15px;
 		right: 15px;
 	}
@@ -155,6 +156,7 @@ a,a:visited{text-decoration: none;}
 
 	&__icon {
 		position: absolute;
+		cursor: pointer;
 		top: 15px;
 		right: 15px;
 	}
@@ -217,3 +219,113 @@ a,a:visited{text-decoration: none;}
 }
 
 
+
+.modal__buyCard {
+	position: absolute;
+	right: 500px;
+	width: 650px;
+	height: auto;
+	z-index: 1000;
+}
+
+.modal__buyCard__contentTitle {
+	position: relative;
+	background-color: #0C0C0E;
+}
+
+.modal__buyCard__title {
+	color: #FFF;
+	text-align: center;
+	font-family: 'Forum';
+	font-size: 40px;
+	padding: 20px 143px;
+	line-height: 20px; 
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+}
+
+.modal__buyCard__icon {
+	position: absolute;
+	top: 22px;
+	right: 23px;
+}
+
+.modal__buyCard__container {
+	display: flex;
+	gap: 0 40px;
+	background-color: #fff;
+	padding: 30px 40px 40px;
+}
+
+.modal__buyCard__content {
+	margin-bottom: 17px;
+}
+
+.modal__buyCard__expirationInputs {
+	display: flex;
+
+	& input {
+		width: 45px;
+		margin-right: 10px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+.modal__buyCard__CVC input {
+	width: 45px;
+}
+
+.modal__buyCard__subtitle {
+	color: #000;
+	font-size: 15px;
+	margin-bottom: 5.5px;
+	line-height: 20px;
+	letter-spacing: 0.3px;
+}
+
+.modal__buyCard__input {
+	border: 1px solid #BB945F;
+	width: 200px;
+}
+
+.modal__buyCard__btnAndSell {
+	display: flex;
+	margin-top: 20px;
+	align-items: end;
+	gap: 0 25px;
+}
+
+.modal__buyCard__btn {
+	width: 75px;
+	font-size: 0.5rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 9px 0;
+	border: 1px solid #000;
+	background-color: #fff;
+	border-radius: 3px;
+	transition: 0.3s;
+	&:hover:not(:disabled) {
+		background-color: #BB945F;
+		border: 1px solid #BB945F;
+	}
+}
+
+.modal__buyCard__sell {
+	display: inline-block;
+	color: #0C0C0E;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 20px; 
+	letter-spacing: 2px;
+}
+
+.modal__buyCard__p {
+	color: #8E8E8E;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 2px;
+}

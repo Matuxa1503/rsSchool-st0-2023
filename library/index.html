@@ -100,9 +100,9 @@
 
 						<div class="header__iconUser noneDisplay"></div>
 						<div class="header__dropMenuUser noneDisplay">
-							<div class="header__dropMenuUser__title">Profile</div>
-							<p class="header__dropMenuUser__text dropMenuUser__login">My profile</p>
-							<p class="header__dropMenuUser__text dropMenuUser__register">Log Out</p>
+							<div class="header__dropMenuUser__title"></div>
+							<p class="header__dropMenuUser__text dropMenuUser__profile">My profile</p>
+							<p class="header__dropMenuUser__text dropMenuUser__logOut">Log Out</p>
 						</div>
 						
 						<div class="header__burger-icon">
@@ -173,6 +173,53 @@
 			</section>
 
 			<section class="favorites defPos" id="favorites">
+
+				<div class="modal__buyCard noneDisplay">
+					<div class="modal__buyCard__contentTitle">
+						<div class="modal__buyCard__title">Buy a library card</div>
+						<svg class="modal__buyCard__icon" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+							<path d="M2 16.8507L17 2" stroke="white" stroke-width="3"/>
+							<path d="M2 2.14929L17 17" stroke="white" stroke-width="3"/>
+						</svg>
+					</div>
+					<div class="modal__buyCard__container">
+						<form class="modal__buyCard__inputs" action="#">
+							<div class="modal__buyCard__content">
+								<div class="modal__buyCard__subtitle">Bank card number</div>
+								<input type="text" class="modal__buyCard__input">
+							</div>
+							<div class="modal__buyCard__content">
+								<div class="modal__buyCard__subtitle">Expiration code</div>
+								<div class="modal__buyCard__expirationInputs">
+									<input type="text" class="modal__buyCard__input">
+									<input type="text" class="modal__buyCard__input">
+								</div>
+							</div>
+							<div class="modal__buyCard__content modal__buyCard__CVC">
+								<div class="modal__buyCard__subtitle">CVC</div>
+								<input type="text" class="modal__buyCard__input">
+							</div>
+							<div class="modal__buyCard__content">
+								<div class="modal__buyCard__subtitle">Cardholder name</div>
+								<input type="text" class="modal__buyCard__input">
+							</div>
+							<div class="modal__buyCard__content">
+								<div class="modal__buyCard__subtitle">Postal code</div>
+								<input type="text" class="modal__buyCard__input">
+							</div>
+							<div class="modal__buyCard__content">
+								<div class="modal__buyCard__subtitle">City / Town</div>
+								<input type="text" class="modal__buyCard__input">
+							</div>
+							<div class="modal__buyCard__btnAndSell">
+								<button type="submit" class="modal__buyCard__btn">Buy</button>
+								<p class="modal__buyCard__sell"><b>$ 25.00</b></p>
+							</div>
+						</form>
+						<p class="modal__buyCard__p">If you are live, work, attend school, or pay property taxes in New York State, you can get a $25 digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.</p>
+					</div>	<!-- /modal__buyLibraryCard -->
+				</div>	<!-- /modal__buyLibraryCard -->
+				
 				<div class="container">
 					<div class="section__title favorites__title">
 						<h2 class="defaultTitle">Favorites</h2>

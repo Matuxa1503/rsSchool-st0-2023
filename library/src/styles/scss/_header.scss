@@ -100,6 +100,7 @@
 
 	&__text {
 		text-align: center;
+		cursor: pointer;
 		font-size: 15px;
 		font-weight: 400;
 		margin-bottom: 20px;
@@ -109,6 +110,7 @@
 
 .header__iconUser {
 	position: relative;
+	cursor: pointer;
 	width: 30px;
 	height: 30px;
 	z-index: 10;
@@ -136,7 +138,7 @@
 	
 	&__title {
 		position: relative;
-		font-size: 15px;
+		font-size: 13px;
 		line-height: 20px;
 		margin-bottom: 20px;
 		font-weight: 700;
@@ -154,6 +156,7 @@
 
 	&__text {
 		text-align: center;
+		cursor: pointer;
 		font-size: 15px;
 		font-weight: 400;
 		margin-bottom: 20px;

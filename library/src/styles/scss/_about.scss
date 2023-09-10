@@ -7,20 +7,28 @@
 	}
 
 	&__slider-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-bottom: 5.5%;
+		margin-bottom: 2.5%;
+	}
+
+	&__slider &__slider-line {
+		white-space: nowrap;
+		scroll-behavior: smooth;
+		overflow: hidden;
 	}
 
 	&__slider {
-		position: relative;
-		display: flex;
-		justify-content: space-between;
-		gap: 0 5px;
-		flex-wrap: wrap;
-		overflow: hidden;
+		max-width: 1400px;
+	}
+
+	&__slider-line img {
+		width: 32%;
+		margin-right: 20px;
+		object-fit: cover;
 		height: 560px;
+
+		&:last-child {
+			margin-right: 0;
+		}
 	}
 
 	&__arrow {
@@ -35,6 +43,7 @@
 			width: 26px;
 			height: 26px;
 			cursor: pointer;
+			background: none;
 
 			&:nth-child(4),
 			&:nth-child(5) {
@@ -43,6 +52,7 @@
 		}
 		
 		&-circle {
+			display: block;
 			width: 16px;
 			height: 16px;
 			margin: 5px auto 0;
@@ -55,7 +65,6 @@
 .active {
 	background-color: #BB945F;
 }
-
 
 
 

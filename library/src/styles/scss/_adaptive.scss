@@ -1,9 +1,14 @@
 @media screen and (max-width: 1400px) {
 	.about {
 		&__slider {
-			justify-content: space-around;
+			width: 900px;
+			margin: 0 auto;
 		}
-		
+
+		&__slider-line img {
+			width: 49.5%;
+		}
+
 		&__pagination-content:nth-child(4) { 
 			display: block;
 		}
@@ -52,6 +57,14 @@
 		&__link:hover::after {
 			display: none;
 		}
+	}
+
+	.header__dropMenu {
+		right: 105px;
+	}
+
+	.header__dropMenuUser {
+		right: 105px;
 	}
 
 	// burger menu
@@ -118,11 +131,19 @@
 	.favorites {
 		&__paragraph {
 			margin-bottom: 6%;
+			background: #fff;
+			top: 0;  
+			z-index: 100;  
+			width: 100%;  
 		}
 
 		&__radioButtons {
 			margin-bottom: 5.5%;
 			gap: 0 42px;
+			background: #fff;
+			top: 0;  
+			z-index: 100;  
+			width: 100%;  
 		}
 	}
 
@@ -206,11 +227,31 @@
 			margin: 0 45px;
 		}
 
+		&__slider-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		&__slider-line img {
+			width: 100%;
+			margin-right: -6px;
+		}
+
+		&__arrowBtn {
+			display: inline-block;
+			position: relative;
+			top: 20px;
+			background-color: inherit;
+		}
+
 		&__arrow {
 			display: inline-block;
 			cursor: pointer;
-			position: relative;
-			top: 20px;
+		}
+
+		#arrowLeft {
+			opacity: 0.3;
 		}
 
 		&__pagination-content:nth-child(5) {
@@ -229,4 +270,3 @@
 	}
 
 }// end media 944px
-

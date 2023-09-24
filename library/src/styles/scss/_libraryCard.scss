@@ -12,6 +12,8 @@
 	}
 
 	&__card-container {
+		position: relative;
+		height: 386px;
 		border: 3px solid #BB945F;
 		text-align: center;
 		padding: 19px 18px 26px;
@@ -21,10 +23,14 @@
 
 
 .libraryCard__form {
-	width: 560px;
-	background-color: #BB945F;
-	margin-bottom: 4%;
-	padding: 28px 20px 23px 19px;
+
+	&-wrapper {
+		width: 560px;
+		background-color: #BB945F;
+		margin-bottom: 2%;
+		padding: 28px 20px 0 19px;
+	}
+
 
 	&-title {
 		color: #000;
@@ -41,6 +47,7 @@
 	}
 
 	&-input {
+		width: 100%;
 		font-size: 1.5rem;
 		font-family: 'Forum';
 		border: 1px solid #fff;
@@ -61,6 +68,9 @@
 	}
 
 	&-btn {
+		position: absolute;
+		top: 81%;
+		left: 29.5%;
 		font-size: 1rem;
 		font-weight: 700;
 		letter-spacing: 1px;
@@ -74,6 +84,20 @@
 			border-color: #BB945F;
 			background-color: #BB945F;
 		}
+	}
+}
+
+.libraryCard__info {
+	display: flex;
+	justify-content: center;
+}
+
+.library__info {
+	font-size: 10px;
+	margin-right: 35px;
+	&:last-child {
+		font-size: 10px;
+		margin-right: 0;
 	}
 }
 
@@ -119,3 +143,6 @@
 	}
 }
 
+.libraryCard__afterLogin {
+	text-align: right;
+}

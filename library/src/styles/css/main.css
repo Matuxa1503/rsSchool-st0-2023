@@ -238,61 +238,52 @@ a, a:visited {
 }
 
 .modal__buyCard {
-  position: absolute;
-  right: 500px;
-  width: 650px;
+  position: fixed;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -51%);
+  width: 640px;
   height: auto;
   z-index: 1000;
 }
-
 .modal__buyCard__contentTitle {
   position: relative;
   background-color: #0C0C0E;
 }
-
 .modal__buyCard__title {
   color: #FFF;
   text-align: center;
   font-family: "Forum";
-  font-size: 40px;
+  font-size: 38px;
   padding: 20px 143px;
   line-height: 20px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
-
 .modal__buyCard__icon {
   position: absolute;
   top: 22px;
   right: 23px;
 }
-
 .modal__buyCard__container {
   display: flex;
-  gap: 0 40px;
+  gap: 0 39px;
   background-color: #fff;
   padding: 30px 40px 40px;
 }
-
 .modal__buyCard__content {
   margin-bottom: 17px;
 }
-
-.modal__buyCard__expirationInputs {
-  display: flex;
-}
 .modal__buyCard__expirationInputs input {
   width: 45px;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .modal__buyCard__expirationInputs input:last-child {
   margin-right: 0;
 }
-
 .modal__buyCard__CVC input {
   width: 45px;
 }
-
 .modal__buyCard__subtitle {
   color: #000;
   font-size: 15px;
@@ -300,19 +291,16 @@ a, a:visited {
   line-height: 20px;
   letter-spacing: 0.3px;
 }
-
 .modal__buyCard__input {
   border: 1px solid #BB945F;
   width: 200px;
 }
-
 .modal__buyCard__btnAndSell {
   display: flex;
   margin-top: 20px;
   align-items: end;
   gap: 0 25px;
 }
-
 .modal__buyCard__btn {
   width: 75px;
   font-size: 0.5rem;
@@ -328,7 +316,6 @@ a, a:visited {
   background-color: #BB945F;
   border: 1px solid #BB945F;
 }
-
 .modal__buyCard__sell {
   display: inline-block;
   color: #0C0C0E;
@@ -337,13 +324,139 @@ a, a:visited {
   line-height: 20px;
   letter-spacing: 2px;
 }
-
 .modal__buyCard__p {
   color: #8E8E8E;
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 2px;
+}
+
+.modal__profile {
+  position: fixed;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -51%);
+  width: 600px;
+  height: 400px;
+  z-index: 1000;
+  background: #FFF;
+}
+.modal__profile__icon {
+  position: absolute;
+  cursor: pointer;
+  top: 22px;
+  right: 22px;
+}
+.modal__profile__content {
+  display: flex;
+}
+.modal__profile__left {
+  width: 170px;
+  height: 400px;
+  border: 1px solid #0C0C0E;
+  background: #0C0C0E;
+}
+.modal__profile__right {
+  padding: 40px 25px 0 22px;
+}
+
+.profile__left__icon {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #fff;
+  top: 37%;
+  left: 12.5%;
+  transform: translate(-37%, -12.5%);
+}
+
+.profile__left__icon p {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  color: #BB945F;
+  line-height: 20px;
+}
+.profile__left__name {
+  position: absolute;
+  text-transform: capitalize;
+  background-color: #fff;
+  text-align: center;
+  width: 120px;
+  padding: 5px 15px;
+  top: 58.5%;
+  left: 4.5%;
+}
+
+.profile__right__title {
+  font-family: "Forum";
+  font-size: 40px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.profile__right__info {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  width: 237px;
+  margin-bottom: 20px;
+}
+
+.profile__info__title {
+  line-height: 20px;
+  letter-spacing: 0.4px;
+}
+.profile__info__icon {
+  margin: 9px 0;
+}
+.profile__info__counter {
+  font-size: 10px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+}
+
+.profile__rented__title {
+  font-size: 25px;
+  line-height: 20px;
+  margin-bottom: 30px;
+}
+.profile__rented__books {
+  width: 350px;
+  height: 50px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  margin-bottom: 40px;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+.profile__rented__books li {
+  margin-left: 30px;
+  white-space: nowrap;
+  list-style: disc;
+  margin-bottom: 10px;
+}
+
+.library__info__icon {
+  margin: 1px 0;
+}
+
+.profile__card__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 280px;
+}
+
+.profile__cardNumber {
+  color: #BB945F;
+}
+
+.clipboard {
+  cursor: pointer;
 }
 
 .header {
@@ -842,17 +955,19 @@ a, a:visited {
   margin-bottom: 4.9%;
 }
 .libraryCard__card-container {
+  position: relative;
+  height: 386px;
   border: 3px solid #BB945F;
   text-align: center;
   padding: 19px 18px 26px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.libraryCard__form {
+.libraryCard__form-wrapper {
   width: 560px;
   background-color: #BB945F;
-  margin-bottom: 4%;
-  padding: 28px 20px 23px 19px;
+  margin-bottom: 2%;
+  padding: 28px 20px 0 19px;
 }
 .libraryCard__form-title {
   color: #000;
@@ -867,6 +982,7 @@ a, a:visited {
   flex-direction: column;
 }
 .libraryCard__form-input {
+  width: 100%;
   font-size: 1.5rem;
   font-family: "Forum";
   border: 1px solid #fff;
@@ -884,6 +1000,9 @@ a, a:visited {
   outline: 0;
 }
 .libraryCard__form-btn {
+  position: absolute;
+  top: 81%;
+  left: 29.5%;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -896,6 +1015,20 @@ a, a:visited {
 .libraryCard__form-btn:hover {
   border-color: #BB945F;
   background-color: #BB945F;
+}
+
+.libraryCard__info {
+  display: flex;
+  justify-content: center;
+}
+
+.library__info {
+  font-size: 10px;
+  margin-right: 35px;
+}
+.library__info:last-child {
+  font-size: 10px;
+  margin-right: 0;
 }
 
 .libraryCard__login {
@@ -932,6 +1065,10 @@ a, a:visited {
 .libraryCard__login-btn:hover {
   border-color: #BB945F;
   background-color: #BB945F;
+}
+
+.libraryCard__afterLogin {
+  text-align: right;
 }
 
 .info {
@@ -1147,6 +1284,9 @@ a, a:visited {
   .libraryCard__login-paragraph {
     max-width: 600px;
     margin-bottom: 6.5%;
+  }
+  .libraryCard__afterLogin {
+    text-align: center;
   }
   .infoBlockTwo {
     margin-top: 1.7%;

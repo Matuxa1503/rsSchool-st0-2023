@@ -28,6 +28,13 @@ window.addEventListener('click', function(e) {
 // 1 этап
 function beforeLogin () {
 if (!localStorage.getItem('loginUser') || localStorage.getItem('loginUser') == 'false') {
+
+	// Блок с кнопками регистрации и логина в блоке Digital Library Cards
+const libraryCardLogin = document.querySelector('.libraryCard__login');
+libraryCardLogin.classList.remove('noneDisplay');
+
+
+
 // REGISTER USER
 	// Modal Register
 // Получаем наш элемент(кнопку) в дропменю Register
@@ -165,7 +172,7 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 		// Card number
 		let cardNumber = '';
 		while (cardNumber.length < 9) {
-		cardNumber += Math.floor(Math.random() * 16).toString(16).toUpperCase();
+			cardNumber += Math.floor(Math.random() * 16).toString(16).toUpperCase();
 		}
 		// ---------
 
@@ -173,13 +180,19 @@ document.getElementById('modal__register__form').addEventListener('submit', func
 		
 		// 7.3 Записываем его в localStorage
 		localStorage.setItem('user', JSON.stringify(user));
+		localStorage.setItem('visits', JSON.stringify(1));
 		localStorage.setItem('loginUser', 'true');
+		localStorage.setItem('libraryCard', 'false');
+		localStorage.setItem('booksCounter', '0');
+		localStorage.setItem('booksList', '[]');
+
 		// 7.4 После записи в localStorage чистим наши инпуты
 		futureObject.forEach(input => {
 			input.value = '';
 		});
 		showModalRegister()
-		afterLogin()
+		location.reload()
+		// afterLogin()
 	}
 });
 // end REGISTER USER
@@ -246,23 +259,65 @@ document.getElementById('modal__login__form').addEventListener('submit', functio
 			}
 		});
 		if (res == 2) {
-			localStorage.setItem('loginUser', true)
+			localStorage.setItem('loginUser', true);
+			localStorage.setItem('visits', JSON.parse(localStorage.getItem('visits')) + 1);
 			showModalLogin()
-			afterLogin()
+			location.reload()
 		}
 	}
 });
-// end LOGIN USER
-}
+
+// без авторизации клик на check the card
+	document.getElementById('libraryCard__form').addEventListener('submit', function(e) {
+		e.preventDefault()
+		let res = 0;
+		const inputsLibraryCard = this.querySelectorAll('.libraryCard__form-input');
+		inputsLibraryCard.forEach(input => {
+			if (input.value == JSON.parse(localStorage.getItem('user')).name) {
+				res++
+			}
+
+			if (input.value == JSON.parse(localStorage.getItem('user')).cardNumber) {
+				res++
+			}
+			});
+
+		if (res == 2) {
+			document.querySelector('.libraryCard__form-btn').classList.add('noneDisplay');
+			document.querySelector('.libraryCard__info__wrapper').classList.remove('noneDisplay');
+			const profileCounter = document.querySelectorAll('.visits__counter');
+			profileCounter.forEach(visitsCounter => {
+				visitsCounter.innerHTML = JSON.parse(localStorage.getItem('visits'));
+			});
+			const profileBooksCounter = document.querySelectorAll('.books__counter');
+			profileBooksCounter.forEach(counterBooks => {
+				counterBooks.innerHTML = JSON.parse(localStorage.getItem('booksCounter'));
+			});
+			setTimeout(() => {
+				document.querySelector('.libraryCard__info__wrapper').classList.add('noneDisplay');
+				document.querySelector('.libraryCard__form-btn').classList.remove('noneDisplay');
+				inputsLibraryCard.forEach(input => input.value = '');
+			}, '10000');
+		}
+	});
+
+}// end LOGIN USER
 } // end function beforeLogin
 beforeLogin()
-
-// muravskiy.03@mail.ru
 
 
 // USER AFTER LOGIN
 function afterLogin() {
 	if (localStorage.getItem('loginUser') == 'true') {
+
+	const libraryCardLogin = document.querySelector('.libraryCard__login');
+	libraryCardLogin.classList.add('noneDisplay');
+
+
+		// Блок с кнопкой profile в блоке Digital Library Cards
+		const libraryCardAfterLogin = document.querySelector('.libraryCard__afterLogin');
+		libraryCardAfterLogin.classList.remove('noneDisplay');
+
 	// При авторизации клик по иконке
 	const headerIconUser = document.querySelector('.header__iconUser');
 	const headerDropMenuUser = document.querySelector('.header__dropMenuUser');
@@ -283,28 +338,295 @@ function afterLogin() {
 	let nameAndSurname = JSON.parse(localStorage.getItem('user')).name + " " + JSON.parse(localStorage.getItem('user')).surname;
 	headerIconUser.setAttribute('title', nameAndSurname);
 
-
-
 	// 7.5 Получаем 2 буквы для записи их в иконку и иконку по умолчанию прячем
-			let p = document.createElement('p');
-			p.innerHTML = JSON.parse(localStorage.getItem('user')).name[0] + JSON.parse(localStorage.getItem('user')).surname[0];
-			headerIconUser.append(p);
+			function createName () {
+				let p = document.createElement('p');
+				p.innerHTML = JSON.parse(localStorage.getItem('user')).name[0].toUpperCase() + JSON.parse(localStorage.getItem('user')).surname[0].toUpperCase();
+				return p
+			}
+			
+			headerIconUser.append(createName());
 			headerIcon.classList.add('noneDisplay');
 			headerIconUser.classList.remove('noneDisplay');
-			
+
+			// libraryCardForm
+			const libraryCardInputName = document.querySelector('.libraryCard__input-name');
+			const libraryCardInputCard = document.querySelector('.libraryCard__input-card');
+			const libraryFormBtn = document.querySelector('.libraryCard__form-btn');
+			const libraryCardInfo = document.querySelector('.libraryCard__info__wrapper');
+			libraryCardInputName.value = JSON.parse(localStorage.getItem('user')).name;
+			libraryCardInputCard.value = JSON.parse(localStorage.getItem('user')).cardNumber;
+			libraryFormBtn.classList.toggle('noneDisplay');
+			libraryCardInfo.classList.toggle('noneDisplay');
+
+
+
+
+			// log out
 			const logoutDropMenuUser = document.querySelector('.dropMenuUser__logOut');
 			logoutDropMenuUser.addEventListener('click', () => {
 				localStorage.setItem('loginUser', false);
 				headerIcon.classList.remove('noneDisplay');
-				headerIconUser.removeChild(p);
 				headerIconUser.classList.add('noneDisplay');
 				headerDropMenuUser.classList.add('noneDisplay');
-				beforeLogin()
+				libraryCardAfterLogin.classList.add('noneDisplay');
+
+				//libraryCardForm
+				libraryCardInputName.value = '';
+				libraryCardInputCard.value = '';
+				libraryFormBtn.classList.toggle('noneDisplay');
+				libraryCardInfo.classList.toggle('noneDisplay');
+				location.reload()
 			});
-	} 
-}  // end function afterLogin
+
+			// modalProfile
+			const profileUser = document.querySelector('.dropMenuUser__profile');
+			const dropMenuProfile = document.querySelector('.modal__profile');
+			const modalIconProfile = document.querySelector('.modal__profile__icon');
+			const profileCounter = document.querySelectorAll('.visits__counter');
+			const profileBtn = document.querySelector('.profile__btn');
+
+
+			profileCounter.forEach(visitsCounter => {
+				visitsCounter.innerHTML = JSON.parse(localStorage.getItem('visits'));
+			});
+			
+
+
+			profileUser.addEventListener('click', showProfileUser)
+			profileBtn.addEventListener('click', showProfileUser)
+
+			function showProfileUser () {
+				dropMenuProfile.classList.toggle('noneDisplay');
+				bcgOpacity.classList.toggle('activeOpacity');
+				bodyHidden.classList.toggle('bodyHiddenModal');
+			}
+
+			modalIconProfile.addEventListener('click', () => showProfileUser())
+
+			bcgOpacity.addEventListener('click', function(e) {
+				if (!dropMenuProfile.contains(e.target) && !dropMenuProfile.classList.contains('noneDisplay')) {
+					showProfileUser()
+				}
+			});
+
+			const profileIconUser = document.querySelector('.profile__left__icon');
+			const profileIconName = document.querySelector('.profile__left__name');
+			const profileCardNum = document.querySelector('.profile__cardNumber');
+			const clipboardProfile = document.querySelector('.clipboard');
+
+			profileIconUser.append(createName());
+			let p = document.createElement('p');
+			p.innerHTML = JSON.parse(localStorage.getItem('user')).name + " " + JSON.parse(localStorage.getItem('user')).surname;
+			profileIconName.append(p);
+			profileCardNum.append(JSON.parse(localStorage.getItem('user')).cardNumber);
+
+			clipboardProfile.addEventListener('click', () => {
+				navigator.clipboard.writeText(JSON.parse(localStorage.getItem('user')).cardNumber)
+			});
+
+			const favoritesBooks = document.querySelectorAll('.favorites__book__title');
+			const favoritesBookBtns = document.querySelectorAll('.favorites__book__btn');
+			const modalBuyCard = document.querySelector('.modal__buyCard');
+			const modalBuyCardIcon = document.querySelector('.modal__buyCard__icon');
+			const rentedBooks = document.querySelector('.profile__rented__books');
+			const profileBooksCounter = document.querySelectorAll('.books__counter');
+
+			function showModalCard() {
+				modalBuyCard.classList.toggle('noneDisplay');
+				bcgOpacity.classList.toggle('activeOpacity');
+				bodyHidden.classList.toggle('bodyHiddenModal');
+			}
+
+			favoritesBookBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					if (JSON.parse(localStorage.getItem('libraryCard'))) {
+						function createLiForRented (currentBook, id) {
+							// добавляем книгу в rented book и изменяем счетчик
+							let li = document.createElement('li');
+							let liText = currentBook.textContent;
+							let liTextNew = liText.replace(/by/i, ',');
+							li.innerHTML = liTextNew;
+							rentedBooks.append(li);
+
+							// cчетчик книг
+							localStorage.setItem('booksCounter', JSON.parse(localStorage.getItem('booksCounter')) + 1);
+							profileBooksCounter.forEach(counterBooks => {
+								counterBooks.innerHTML = JSON.parse(localStorage.getItem('booksCounter'));
+							})
+
+							// записываем название книг в массив localStorage
+							let localStorageBook = JSON.parse(localStorage.getItem('booksList'));
+							function BookIntoLocalStorage(text, id) {
+								this.bookTitle = text;
+								this.idBook = id;
+							}
+							let book = new BookIntoLocalStorage(liTextNew, id);
+							localStorageBook.push(book);
+							localStorage.setItem('booksList', JSON.stringify(localStorageBook));
+						}
+
+						if (btn.id == 'buy1') {
+							createLiForRented(favoritesBooks[0], btn.id);
+						}
+						if (btn.id == 'buy2') {
+							createLiForRented(favoritesBooks[1], btn.id);
+						}
+						if (btn.id == 'buy3') {
+							createLiForRented(favoritesBooks[2], btn.id);
+						}
+						if (btn.id == 'buy4') {
+							createLiForRented(favoritesBooks[3], btn.id);
+						}
+						if (btn.id == 'buy5') {
+							createLiForRented(favoritesBooks[4], btn.id);
+						}
+						if (btn.id == 'buy6') {
+							createLiForRented(favoritesBooks[5], btn.id);
+						}
+						if (btn.id == 'buy7') {
+							createLiForRented(favoritesBooks[6], btn.id);
+						}
+						if (btn.id == 'buy8') {
+							createLiForRented(favoritesBooks[7], btn.id);
+						}
+						if (btn.id == 'buy9') {
+							createLiForRented(favoritesBooks[8], btn.id);
+						}
+						if (btn.id == 'buy10') {
+							createLiForRented(favoritesBooks[9], btn.id);
+						}
+						if (btn.id == 'buy11') {
+							createLiForRented(favoritesBooks[10], btn.id);
+						}
+						if (btn.id == 'buy12') {
+							createLiForRented(favoritesBooks[11], btn.id);
+						}
+						if (btn.id == 'buy13') {
+							createLiForRented(favoritesBooks[12], btn.id);
+						}
+						if (btn.id == 'buy14') {
+							createLiForRented(favoritesBooks[13], btn.id);
+						}
+						if (btn.id == 'buy15') {
+							createLiForRented(favoritesBooks[14], btn.id);
+						}
+						if (btn.id == 'buy16') {
+							createLiForRented(favoritesBooks[15], btn.id);
+						}
+						btn.disabled = true;
+						btn.innerHTML = 'Own'
+					} else {
+						showModalCard()
+					}
+				});
+			});
+
+			if (JSON.parse(localStorage.getItem('booksList')).length != 0) {
+				JSON.parse(localStorage.getItem('booksList')).forEach(currentBook => {
+					function createRentedLi(nameTitle) {
+						let li = document.createElement('li');
+						li.innerHTML = nameTitle;
+						rentedBooks.append(li);
+					}
+					createRentedLi(currentBook.bookTitle);
+
+					// cчетчик книг
+					profileBooksCounter.forEach(counterBooks => {
+						counterBooks.innerHTML = JSON.parse(localStorage.getItem('booksCounter'));
+					})
+
+					favoritesBookBtns.forEach(btn => {
+						if (currentBook.idBook == btn.id) {
+							btn.disabled = true;
+							btn.innerHTML = 'Own'
+						}
+					});
+				})
+			}
+
+			modalBuyCardIcon.addEventListener('click', () => {
+				showModalCard()
+			})
+
+			bcgOpacity.addEventListener('click', function(e) {
+				if (!modalBuyCard.classList.contains('noneDisplay') && !modalBuyCard.contains(e.target)) {
+					showModalCard()
+				}
+			});
+
+
+			function validation(form) {
+
+				function removeError(input) {
+					const parent = input.parentNode;
+					
+					if (parent.classList.contains('errorInput')) {
+						parent.querySelector('.errorLabelModal').remove();
+						parent.classList.remove('errorInput');
+					}
+				}
+				//Создание ошибок. Передаем инпут и название ошибки, создаем label, ему добавляем класс errorLabelModal(и присваиваем ему текст ошибки)
+				function createError(input, text) {
+					const errorLabel = document.createElement('label');
+					errorLabel.classList.add('errorLabelModal');
+					errorLabel.textContent = text;
+					//получаем родителя инпута и красим границу инпута в красный, добавляем как ребенка под инпутом наш label c ошибкой
+					const parent = input.parentNode;
+					parent.classList.add('errorInput');
+					parent.append(errorLabel);
+				}
+			
+				let result = true;
+				//Удаляем если были изначально ошибки 
+				form.querySelectorAll('input').forEach(input => {
+					removeError(input);
+					//Проверка имени и фамилии через дата атрибут в html
+					if (input.dataset.required) {
+						//Удаляем если были изначально ошибки и проверяем если инпут не соответсвует условию, тогда создаем для него ошибку createError() и присваем result = false
+						removeError(input);
+						if (input.value == '') {
+							createError(input, 'Поле не заполнено')
+							result = false;
+						}
+					}
+
+					if (input.dataset.numLength) {
+						removeError(input);
+						if (input.dataset.numLength < 5) {
+							if (input.value.length < input.dataset.numLength) {
+								createError(input, `Должен содержать ${input.dataset.numLength} символа`)
+								result = false;
+							}
+						} else {
+							if (input.value.length < input.dataset.numLength) {
+								createError(input, `Должен содержать ${input.dataset.numLength} символов`)
+								result = false;
+							}
+						}
+					}
+				});
+				// Возвращаем result
+				return result
+			}
+
+			document.getElementById('modal__buyCard__inputs').addEventListener('submit', function(e) {
+				e.preventDefault();
+			
+			//Вызываем функцию validation и ей передаем нашу форму через this
+				if (validation(this) == true) {
+					localStorage.setItem('libraryCard', true);
+					showModalCard()
+					location.reload()
+				}
+			});
+
+
+		} 
+	}  // end function afterLogin
 // end USER AFTER LOGIN
 afterLogin()
+
 
 
 // Burger menu

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,regular,700" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/1231ac999c.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="img/itunes-note.svg">
+	<script defer src="index.js"></script>
+	<title>Audio Player</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="music__player">
+			<img class="music__img" src="" >
+			<h1 class="music__title"></h1>
+			<h3 class="music__author"></h3>
+			<audio controls preload="metadata">
+				<source src="" type="audio/mp3">
+			</audio>
+			<input type="range" value="0" id="progress">
+			<div class="music__time">
+				<div class="music__currentTime">00:00</div>
+				<div class="music__fullTime">00:00</div>
+			</div>
+			<div class="music__controls">
+				<div class="prev__controls">
+					<i class="fa-solid fa-backward"></i>
+				</div>
+				<div class="center__controls">
+					<i class="fa-solid fa-play"></i>
+					<i class="fa-solid fa-pause noneDisplay"></i>
+				</div>
+				<div class="next__controls">
+					<i class="fa-solid fa-forward"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="footer__wrapper">
+			<a href="https://github.com/Matuxa1503" target="_blank">
+				<div class="github" ><i class="fa-brands fa-github"></i></div>
+			</a>
+			<div class="year">2023</div>
+			<a href="https://rs.school/js-stage0/" target="_blank">
+				<img class="school" src="img/rs_school.png" alt="">
+			</a>
+		</div>
+
+	</footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.container {
+	padding: 0 10px;
+	max-width: 1420px;
+	margin: 0 auto;
+}
+
+.images-content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px 20px;
+	justify-content: space-around;
+}
+

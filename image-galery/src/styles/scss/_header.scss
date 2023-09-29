@@ -1,0 +1,47 @@
+header {
+	padding: 25px 0;
+}
+
+.header__wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header__logo {
+	width: 200px;
+	height: auto;
+}
+
+.input-box {
+	display: flex;
+	align-items: center;
+	width: 300px;
+}
+
+.input-text {
+	width: 100%;
+	padding: 10px 15px;
+	border-radius: 25px;
+	outline: none;
+
+	&::-webkit-search-cancel-button {
+		-webkit-appearance: none; 
+		width: 17px; 
+		height: 16px;
+		background: url('../../../img/xmark-solid.svg') no-repeat;
+		cursor: pointer;
+	}
+}
+
+.fa-magnifying-glass {
+	color: #fff;
+	cursor: pointer;
+	margin-right: 15px;
+	padding: 5px;
+	transition: color 0.5s;
+
+	&:hover {
+		color: #938b8b;
+	}
+}

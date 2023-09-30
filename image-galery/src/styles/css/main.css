@@ -1,0 +1,167 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  background-color: rgb(55, 56, 58);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+p {
+  width: auto;
+}
+
+@media screen and (max-width: 1920px) {
+  .img-galary {
+    width: 400px;
+    height: 260px;
+  }
+  .img-galary:hover {
+    transform: scale(1.05);
+  }
+}
+@media screen and (max-width: 1260px) {
+  .img-galary {
+    width: 500px;
+    height: 350px;
+  }
+}
+@media screen and (max-width: 1040px) {
+  .img-galary {
+    width: 1000px;
+    max-width: 100%;
+    height: auto;
+  }
+  .img-galary:hover {
+    transform: scale(1);
+  }
+}
+header {
+  padding: 25px 0;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  width: 200px;
+  height: auto;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+
+.input-text {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 25px;
+  outline: none;
+}
+.input-text::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  width: 17px;
+  height: 16px;
+  background: url("../../../img/xmark-solid.svg") no-repeat;
+  cursor: pointer;
+}
+
+.fa-magnifying-glass {
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+  padding: 5px;
+  transition: color 0.5s;
+}
+.fa-magnifying-glass:hover {
+  color: #938b8b;
+}
+
+.container {
+  padding: 0 10px;
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+.images-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 20px;
+  justify-content: space-around;
+}
+
+.wrapper-img-galary {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.img-galary {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.footer__content {
+  display: flex;
+  margin-top: 25px;
+  font-size: 24px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer__wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+a .github {
+  color: #fff;
+  font-size: 30px;
+  transition: 0.5s color;
+}
+a .github:hover {
+  color: #938b8b;
+}
+
+.year {
+  color: #fff;
+}
+
+a .school {
+  width: 100px;
+}

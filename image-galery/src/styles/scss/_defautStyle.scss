@@ -1,0 +1,40 @@
+body{font-family: 'Montserrat', sans-serif;font-size: 16px;line-height: 1;background-color: rgb(55, 56, 58)}
+*{padding: 0; margin: 0; border: 0;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+input,button,textarea{font-family: inherit;}
+button{cursor: pointer;}
+ul li{list-style: none;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;}
+a,a:visited{text-decoration: none;color:inherit}
+p{width: auto}
+
+@media screen and (max-width: 1920px) {
+	.img-galary {
+		width: 400px;
+		height: 260px;
+
+		&:hover {
+			transform: scale(1.05);
+		}
+	}
+}
+
+@media screen and (max-width: 1260px) {
+	.img-galary {
+		width: 500px;
+		height: 350px;
+	}
+}
+
+@media screen and (max-width: 1040px) {
+	.img-galary {
+		width: 1000px;
+		max-width: 100%;
+		height: auto;
+
+		&:hover {
+			transform: scale(1);
+		}
+	}
+}
+

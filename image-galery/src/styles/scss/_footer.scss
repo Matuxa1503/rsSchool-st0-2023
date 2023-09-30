@@ -1,0 +1,31 @@
+.footer__content {
+	display: flex;
+	margin-top: 25px;
+	font-size: 24px;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.footer__wrapper {
+	display: flex;
+	width: 100%;
+	justify-content: space-around;
+	align-items: center;
+}
+
+a .github {
+	color: #fff;
+	font-size: 30px;
+	transition: 0.5s color;
+	&:hover {
+		color: #938b8b;
+	}
+}
+
+.year {
+	color: #fff;
+}
+
+a .school {
+	width: 100px;
+}

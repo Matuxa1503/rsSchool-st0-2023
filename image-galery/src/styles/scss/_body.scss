@@ -11,3 +11,13 @@
 	justify-content: space-around;
 }
 
+.wrapper-img-galary {
+	display: inline-block;
+	overflow: hidden;
+}
+
+.img-galary {
+	cursor: pointer;
+	transition: 0.5s;
+}
+

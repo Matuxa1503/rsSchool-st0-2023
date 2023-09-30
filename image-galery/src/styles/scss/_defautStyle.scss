@@ -12,13 +12,17 @@ p{width: auto}
 	.img-galary {
 		width: 400px;
 		height: 260px;
+
+		&:hover {
+			transform: scale(1.05);
+		}
 	}
 }
 
 @media screen and (max-width: 1260px) {
 	.img-galary {
 		width: 500px;
-		height: auto;
+		height: 350px;
 	}
 }
 
@@ -26,6 +30,11 @@ p{width: auto}
 	.img-galary {
 		width: 1000px;
 		max-width: 100%;
+		height: auto;
+
+		&:hover {
+			transform: scale(1);
+		}
 	}
 }
 

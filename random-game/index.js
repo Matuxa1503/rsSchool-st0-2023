@@ -46,16 +46,16 @@ function controllers() {
 function addedBullet() {
 	switch (player.side) {
 		case 1:
-			gameZone.innerHTML += `<div class="shot" flightDirection="top" style="left:${player.x + (player.width / 2) - 7}px;top:${player.y - 15}px;"></div>`
+			gameZone.innerHTML += `<div class="shot" direction="top" style="left:${player.x + (player.width / 2) - 7}px;top:${player.y - 15}px;"></div>`
 			break;
 		case 2:
-			gameZone.innerHTML += `<div class="shot" flightDirection="right" style="left:${player.x + (player.width / 2) + 40}px;top:${player.y + 30}px;"></div>`
+			gameZone.innerHTML += `<div class="shot" direction="right" style="left:${player.x + (player.width / 2) + 40}px;top:${player.y + 30}px;"></div>`
 			break;
 		case 3:
-			gameZone.innerHTML += `<div class="shot" flightDirection="bottom" style="left:${player.x + (player.width / 2) - 7}px;top:${player.y + 75}px;"></div>`
+			gameZone.innerHTML += `<div class="shot" direction="bottom" style="left:${player.x + (player.width / 2) - 7}px;top:${player.y + 75}px;"></div>`
 			break;
 		case 4:
-			gameZone.innerHTML += `<div class="shot" flightDirection="left" style="left:${player.x + (player.width / 2) - 45}px;top:${player.y + 30}px;"></div>`
+			gameZone.innerHTML += `<div class="shot" direction="left" style="left:${player.x + (player.width / 2) - 45}px;top:${player.y + 30}px;"></div>`
 			break;
 	}
 	// заново обращаемся к player т.к танк перестает двигаться
@@ -104,7 +104,7 @@ function intervals() {
 	inter.bullet = setInterval(() => {
 		let bullets = document.querySelectorAll('.shot');
 		bullets.forEach (bullet => {
-			let flightDirectionAttrib = bullet.getAttribute('flightDirection');
+			let flightDirectionAttrib = bullet.getAttribute('direction');
 
 			switch(flightDirectionAttrib) {
 				case 'top':
@@ -139,30 +139,89 @@ function intervals() {
 		})
 	}, fps);
 
-	// интервал для движения противника и если в него попасть он умирает
+	// интервал для движения противника, стороны появления и если в него попасть он умирает
 	inter.enemy = setInterval(() => {
 		let enemyTank = document.querySelectorAll('.enemy');
 		enemyTank.forEach(curPosEnemy => {
+
+			// направление движения противника и движение до края экрана
+			let direction = curPosEnemy.getAttribute('direction');
+			switch (direction) {
+				case 'top':
+					if (curPosEnemy.getBoundingClientRect().top >= gameZone.getBoundingClientRect().height) {
+						curPosEnemy.parentNode.removeChild(curPosEnemy);
+					} else {
+						curPosEnemy.style.top = curPosEnemy.getBoundingClientRect().top - 2 + 'px';
+					}
+					break;
+				case 'right':
+					if (curPosEnemy.getBoundingClientRect().right >= gameZone.getBoundingClientRect().width) {
+						curPosEnemy.parentNode.removeChild(curPosEnemy);
+					} else {
+						curPosEnemy.style.left = curPosEnemy.getBoundingClientRect().left + 2 + 'px';
+					}
+					break;
+				case 'bottom':
+					if (curPosEnemy.getBoundingClientRect().bottom >= gameZone.getBoundingClientRect().height) {
+						curPosEnemy.parentNode.removeChild(curPosEnemy);
+					} else {
+					curPosEnemy.style.top = curPosEnemy.getBoundingClientRect().top + 2 + 'px';
+					}
+					break;
+				case 'left':
+					if (curPosEnemy.getBoundingClientRect().left >= gameZone.getBoundingClientRect().width) {
+						curPosEnemy.parentNode.removeChild(curPosEnemy);
+					} else {
+						curPosEnemy.style.left = curPosEnemy.getBoundingClientRect().left - 2 + 'px';
+					}
+					break;
+			}
+
+			// попадание в врага
 			let bullets = document.querySelectorAll('.shot');
 			bullets.forEach (bullet => {
-				if (bullet.getBoundingClientRect().top < curPosEnemy.getBoundingClientRect().bottom &&
-						bullet.getBoundingClientRect().bottom > curPosEnemy.getBoundingClientRect().top &&
-						bullet.getBoundingClientRect().right > curPosEnemy.getBoundingClientRect().left &&
-						bullet.getBoundingClientRect().left < curPosEnemy.getBoundingClientRect().right) {
+				if (
+					bullet.getBoundingClientRect().top < curPosEnemy.getBoundingClientRect().bottom &&
+					bullet.getBoundingClientRect().bottom > curPosEnemy.getBoundingClientRect().top &&
+					bullet.getBoundingClientRect().right > curPosEnemy.getBoundingClientRect().left &&
+					bullet.getBoundingClientRect().left < curPosEnemy.getBoundingClientRect().right
+				) {
 					curPosEnemy.parentNode.removeChild(curPosEnemy);
 					bullet.parentNode.removeChild(bullet);
-				}
+					counter++;
+					document.querySelector('.counter').textContent = counter;
+				} 
 			});
-
-			// движение до края экрана
-			if (curPosEnemy.getBoundingClientRect().left >= gameZone.getBoundingClientRect().width) {
-				curPosEnemy.style.left = '0px'
-			} else {
-				curPosEnemy.style.left = curPosEnemy.getBoundingClientRect().left + 2 + 'px'
-			}
 		});
 	}, fps);
+
+	// добавление врагов рандомно
+	inter.addRandomEnemy = setInterval(() => {
+		let direction = randomInteger(1, 4);
+		switch(direction) {
+			case 1:
+				gameZone.innerHTML += `<div class="enemy" style="transform: rotate(-90deg); top: ${gameZone.getBoundingClientRect().height - player.height}px;left: ${randomInteger(0, gameZone.getBoundingClientRect().width - player.width)}px;" direction="top"</div>`;
+			break;
+			case 2:
+				gameZone.innerHTML += `<div class="enemy" style="top: ${randomInteger(0, gameZone.getBoundingClientRect().height - player.height)}px;left: 0px;" direction="right"</div>`;
+				break;
+			case 3:
+				gameZone.innerHTML += `<div class="enemy" style="transform: rotate(90deg); top: 0px;left: ${randomInteger(0, gameZone.getBoundingClientRect().width - player.width)}px;" direction="bottom"</div>`;
+				break;
+			case 4:
+				gameZone.innerHTML += `<div class="enemy" style="transform: rotate(-180deg); top: ${randomInteger(0, gameZone.getBoundingClientRect().height - player.height)}px;left: ${gameZone.getBoundingClientRect().width - player.width}px;" direction="left"</div>`;
+				break;
+		}
+		// заново обращаемся к player т.к танк перестает двигаться
+		player.el = document.querySelector('.player');
+	}, 1000);
 };
+
+// ф-ция рандомного создания числа в диапазоне от min до max
+function randomInteger(min, max) {
+	let nums = min + Math.random() * (max - min);
+	return Math.round(nums);
+}
 
 // ф-ция запуска игры
 function startGame() {
@@ -173,6 +232,7 @@ function startGame() {
 
 const gameZone = document.querySelector('.game-zone');
 const fps = 1000 / 60;
+let counter = 0;
 
 const player = {
 	posPlayerImg: {
@@ -182,13 +242,14 @@ const player = {
 		left: 'img/player-left.png',
 	},
 	shot: 'img/bullet.png',
-	x: 100,
-	y: 100,
+	x: 1100,
+	y: 500,
 	el: false,
 	step: 10,
 	run: false,
 	side: 1,
 	width: 78,
+	height: 77,
 };
 
 const bulletFly = {
@@ -200,6 +261,7 @@ const inter = {
 	run: false,
 	bullet: false,
 	enemy: false,
+	addRandomEnemy: false,
 };
 
 startGame();

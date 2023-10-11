@@ -1,7 +1,18 @@
-// Создание поля и добавление игрока
+// Создание поля, добавление игрока и hp
 function initPlayer() {
+	player.x = gameZone.getBoundingClientRect().width / 2 - 40;
+	player.y = gameZone.getBoundingClientRect().height - player.height;
 	gameZone.innerHTML += `<div class="player" style="left:${player.x}px;top:${player.y}px;">`;
 	player.el = document.querySelector('.player');
+
+	switch(player.hp) {
+		case 2:
+			document.querySelector('.heartThree').src = "img/heart3.png";
+			break;
+		case 1:
+			document.querySelector('.heartTwo').src = "img/heart3.png";
+			break;
+	}
 };
 
 // Отслеживание нажатия кнопки
@@ -146,45 +157,69 @@ function intervals() {
 
 			// направление движения противника и движение до края экрана
 			let direction = curPosEnemy.getAttribute('direction');
+			
+			// координаты противника
+			const enemyPosTop = curPosEnemy.getBoundingClientRect().top,
+			enemyPosRight = curPosEnemy.getBoundingClientRect().right,
+			enemyPosBottom = curPosEnemy.getBoundingClientRect().bottom,
+			enemyPosLeft = curPosEnemy.getBoundingClientRect().left;
+			
 			switch (direction) {
 				case 'top':
-					if (curPosEnemy.getBoundingClientRect().top >= gameZone.getBoundingClientRect().height) {
+					if (enemyPosTop >= gameZone.getBoundingClientRect().height) {
 						curPosEnemy.parentNode.removeChild(curPosEnemy);
 					} else {
-						curPosEnemy.style.top = curPosEnemy.getBoundingClientRect().top - 2 + 'px';
+						curPosEnemy.style.top = enemyPosTop - 2 + 'px';
 					}
 					break;
 				case 'right':
-					if (curPosEnemy.getBoundingClientRect().right >= gameZone.getBoundingClientRect().width) {
+					if (enemyPosRight >= gameZone.getBoundingClientRect().width) {
 						curPosEnemy.parentNode.removeChild(curPosEnemy);
 					} else {
-						curPosEnemy.style.left = curPosEnemy.getBoundingClientRect().left + 2 + 'px';
+						curPosEnemy.style.left = enemyPosLeft + 2 + 'px';
 					}
 					break;
 				case 'bottom':
-					if (curPosEnemy.getBoundingClientRect().bottom >= gameZone.getBoundingClientRect().height) {
+					if (enemyPosBottom >= gameZone.getBoundingClientRect().height) {
 						curPosEnemy.parentNode.removeChild(curPosEnemy);
 					} else {
-					curPosEnemy.style.top = curPosEnemy.getBoundingClientRect().top + 2 + 'px';
+					curPosEnemy.style.top = enemyPosTop + 2 + 'px';
 					}
 					break;
 				case 'left':
-					if (curPosEnemy.getBoundingClientRect().left >= gameZone.getBoundingClientRect().width) {
+					if (enemyPosLeft >= gameZone.getBoundingClientRect().width) {
 						curPosEnemy.parentNode.removeChild(curPosEnemy);
 					} else {
-						curPosEnemy.style.left = curPosEnemy.getBoundingClientRect().left - 2 + 'px';
+						curPosEnemy.style.left = enemyPosLeft - 2 + 'px';
 					}
 					break;
 			}
+
+			// координаты игрока
+			const playerPosTop = player.el.getBoundingClientRect().top,
+			playerPosRight = player.el.getBoundingClientRect().right,
+			playerPosBottom = player.el.getBoundingClientRect().bottom,
+			playerPosLeft = player.el.getBoundingClientRect().left;
+
+			// столкновение игрока с противником
+			if (
+				playerPosTop < enemyPosBottom &&
+				playerPosBottom > enemyPosTop &&
+				playerPosRight > enemyPosLeft &&
+				playerPosLeft < enemyPosRight
+				) {
+					player.hp -= 1;
+					nextStart();
+				};
 
 			// попадание в врага
 			let bullets = document.querySelectorAll('.shot');
 			bullets.forEach (bullet => {
 				if (
-					bullet.getBoundingClientRect().top < curPosEnemy.getBoundingClientRect().bottom &&
-					bullet.getBoundingClientRect().bottom > curPosEnemy.getBoundingClientRect().top &&
-					bullet.getBoundingClientRect().right > curPosEnemy.getBoundingClientRect().left &&
-					bullet.getBoundingClientRect().left < curPosEnemy.getBoundingClientRect().right
+					bullet.getBoundingClientRect().top < enemyPosBottom &&
+					bullet.getBoundingClientRect().bottom > enemyPosTop &&
+					bullet.getBoundingClientRect().right > enemyPosLeft &&
+					bullet.getBoundingClientRect().left < enemyPosRight
 				) {
 					curPosEnemy.parentNode.removeChild(curPosEnemy);
 					bullet.parentNode.removeChild(bullet);
@@ -214,7 +249,7 @@ function intervals() {
 		}
 		// заново обращаемся к player т.к танк перестает двигаться
 		player.el = document.querySelector('.player');
-	}, 1000);
+	}, 5000);
 };
 
 // ф-ция рандомного создания числа в диапазоне от min до max
@@ -223,12 +258,39 @@ function randomInteger(min, max) {
 	return Math.round(nums);
 }
 
-// ф-ция запуска игры
+// ф-ции запуска игры и рестарта
 function startGame() {
 	initPlayer();
 	controllers();
 	intervals();
 };
+
+// После убийства player запускается ф-ция которая заново все добавляет (удаляет всех врагов, пули, плеера)
+function nextStart() {
+	clearInterval(inter.enemy);
+	clearInterval(inter.run);
+	clearInterval(inter.bullet);
+	clearInterval(inter.addRandomEnemy);
+
+	const enemies = document.querySelectorAll('.enemy')
+	enemies.forEach(curPosEnemy => {
+		curPosEnemy.parentNode.removeChild(curPosEnemy);
+	});
+
+	player.el.parentNode.removeChild(player.el);
+
+	if (player.hp === 0) {
+		return gameOver();
+	}
+	startGame();
+}
+
+// Конец Игры
+function gameOver() {
+	document.querySelector('.heartOne').src = "img/heart3.png";
+	document.querySelector('.game__over').classList.remove('noneDisplay');
+}
+
 
 const gameZone = document.querySelector('.game-zone');
 const fps = 1000 / 60;
@@ -242,14 +304,15 @@ const player = {
 		left: 'img/player-left.png',
 	},
 	shot: 'img/bullet.png',
-	x: 1100,
-	y: 500,
+	x: 0,
+	y: 0,
 	el: false,
 	step: 10,
 	run: false,
 	side: 1,
 	width: 78,
 	height: 77,
+	hp: 3,
 };
 
 const bulletFly = {

@@ -34,6 +34,14 @@ p{width: auto}
 	background-repeat: no-repeat;
 }
 
+.shotEnemy {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	background: url('img/bullet.png');
+	background-repeat: no-repeat;
+}
+
 .enemy {
 	position: absolute;
 	width: 78px;

@@ -4,45 +4,39 @@ function initPlayer() {
 	player.y = gameZone.getBoundingClientRect().height - player.height;
 	gameZone.innerHTML += `<div class="player" style="left:${player.x}px;top:${player.y}px;">`;
 	player.el = document.querySelector('.player');
-
-	switch(player.hp) {
-		case 2:
-			document.querySelector('.heartThree').src = "img/heart3.png";
-			break;
-		case 1:
-			document.querySelector('.heartTwo').src = "img/heart3.png";
-			break;
-	}
 };
 
 // Отслеживание нажатия кнопки
 function controllers() {
 	document.addEventListener('keydown', (e) => {
-		switch (e.code) {
-			case 'ArrowUp':
-				player.el.style.backgroundImage = `url(${player.posPlayerImg.top})`;
-				player.run = true;
-				player.side = 1;
-				break;
-			case 'ArrowRight':
-				player.el.style.backgroundImage = `url(${player.posPlayerImg.right})`;
-				player.run = true;
-				player.side = 2;
-				break;
-			case 'ArrowDown':
-				player.el.style.backgroundImage = `url(${player.posPlayerImg.bottom})`;
-				player.run = true;
-				player.side = 3;
-				break;
-			case 'ArrowLeft':
-				player.el.style.backgroundImage = `url(${player.posPlayerImg.left})`;
-				player.run = true;
-				player.side = 4;
-				break;
-			case 'Space':
-				addedBullet();
-				break;
+		if (player.hp !== 0) {
+			switch (e.code) {
+				case 'ArrowUp':
+					player.el.style.backgroundImage = `url(${player.posPlayerImg.top})`;
+					player.run = true;
+					player.side = 1;
+					break;
+				case 'ArrowRight':
+					player.el.style.backgroundImage = `url(${player.posPlayerImg.right})`;
+					player.run = true;
+					player.side = 2;
+					break;
+				case 'ArrowDown':
+					player.el.style.backgroundImage = `url(${player.posPlayerImg.bottom})`;
+					player.run = true;
+					player.side = 3;
+					break;
+				case 'ArrowLeft':
+					player.el.style.backgroundImage = `url(${player.posPlayerImg.left})`;
+					player.run = true;
+					player.side = 4;
+					break;
+				case 'Space':
+					addedBullet();
+					break;
+			}
 		}
+		
 	});
 
 // Отслеживание отжатия кнопки
@@ -111,9 +105,48 @@ function intervals() {
 		}
 	}, fps);
 
-	// интервал полета пули
+	// интервал полета пули игрока
 	inter.bullet = setInterval(() => {
 		let bullets = document.querySelectorAll('.shot');
+		bullets.forEach (bullet => {
+			let flightDirectionAttrib = bullet.getAttribute('direction');
+
+			switch(flightDirectionAttrib) {
+				case 'top':
+				if (bullet.getBoundingClientRect().top < 0) {
+					bullet.parentNode.removeChild(bullet);
+				} else {
+					bullet.style.top = bullet.getBoundingClientRect().top - bulletFly.speed + 'px'
+				}
+					break;
+				case 'right':
+					if (bullet.getBoundingClientRect().right > gameZone.getBoundingClientRect().width) {
+						bullet.parentNode.removeChild(bullet);
+					} else {
+						bullet.style.left = bullet.getBoundingClientRect().left + bulletFly.speed + 'px'
+					}
+					break;
+				case 'bottom':
+					if (bullet.getBoundingClientRect().bottom > gameZone.getBoundingClientRect().height) {
+						bullet.parentNode.removeChild(bullet);
+					} else {
+						bullet.style.top = bullet.getBoundingClientRect().top + bulletFly.speed + 'px'
+					}
+					break;
+				case 'left':
+					if (bullet.getBoundingClientRect().left < 0) {
+						bullet.parentNode.removeChild(bullet);
+					} else {
+						bullet.style.left = bullet.getBoundingClientRect().left - bulletFly.speed + 'px'
+					}
+					break;
+			}
+		})
+	}, fps);
+	
+	// интервал полета пули противника
+	inter.bulletEnemy = setInterval(() => {
+		let bullets = document.querySelectorAll('.shotEnemy');
 		bullets.forEach (bullet => {
 			let flightDirectionAttrib = bullet.getAttribute('direction');
 
@@ -208,7 +241,6 @@ function intervals() {
 				playerPosRight > enemyPosLeft &&
 				playerPosLeft < enemyPosRight
 				) {
-					player.hp -= 1;
 					nextStart();
 				};
 
@@ -249,7 +281,78 @@ function intervals() {
 		}
 		// заново обращаемся к player т.к танк перестает двигаться
 		player.el = document.querySelector('.player');
-	}, 5000);
+	}, timeAddEnemy);
+
+	// выстрел врага
+	inter.enemyShot = setInterval(() => {
+		let enemyTank = document.querySelectorAll('.enemy');
+		enemyTank.forEach(curPosEnemy => {
+
+			// направление движения противника и движение до края экрана
+			let direction = curPosEnemy.getAttribute('direction');
+			
+			// координаты противника
+			const enemyPosTop = curPosEnemy.getBoundingClientRect().top,
+			enemyPosRight = curPosEnemy.getBoundingClientRect().right,
+			enemyPosBottom = curPosEnemy.getBoundingClientRect().bottom,
+			enemyPosLeft = curPosEnemy.getBoundingClientRect().left;
+
+			// координаты игрока
+			const playerPosTop = player.el.getBoundingClientRect().top,
+			playerPosRight = player.el.getBoundingClientRect().right,
+			playerPosBottom = player.el.getBoundingClientRect().bottom,
+			playerPosLeft = player.el.getBoundingClientRect().left;
+
+			// Направление полета пули
+			switch (direction) {
+				case 'top':
+					if (playerPosBottom < enemyPosTop && playerPosRight > enemyPosLeft && playerPosRight < enemyPosRight + player.width) {
+						gameZone.innerHTML += `<div class="shotEnemy" direction="top" style="left:${curPosEnemy.getBoundingClientRect().left + curPosEnemy.getBoundingClientRect().width / 2 - 8}px;top:${curPosEnemy.getBoundingClientRect().top}px;"></div>`
+						player.el = document.querySelector('.player');
+					}
+					break;
+				case 'right':
+					if (playerPosTop > enemyPosTop - player.width && playerPosTop < enemyPosBottom && playerPosLeft > enemyPosRight) {
+						gameZone.innerHTML += `<div class="shotEnemy" direction="right" style="left:${curPosEnemy.getBoundingClientRect().left + curPosEnemy.getBoundingClientRect().width}px;top:${curPosEnemy.getBoundingClientRect().top + 30}px;"></div>`
+						player.el = document.querySelector('.player');
+						}
+					break;
+				case 'bottom':
+					if (playerPosTop > enemyPosBottom && playerPosRight > enemyPosLeft && playerPosRight < enemyPosRight + player.width) {
+						gameZone.innerHTML += `<div class="shotEnemy" direction="bottom" style="left:${curPosEnemy.getBoundingClientRect().left + curPosEnemy.getBoundingClientRect().width / 2 - 8}px;top:${curPosEnemy.getBoundingClientRect().top + player.height}px;"></div>`
+						player.el = document.querySelector('.player');
+					}
+					break;
+				case 'left':
+					if (playerPosTop > enemyPosTop - player.width && playerPosTop < enemyPosBottom && playerPosRight < enemyPosLeft) {
+						gameZone.innerHTML += `<div class="shotEnemy" direction="left" style="left:${curPosEnemy.getBoundingClientRect().left}px;top:${curPosEnemy.getBoundingClientRect().top + 30}px;"></div>`
+						player.el = document.querySelector('.player');
+					}
+					break;
+			};
+		});
+	}, timeFlyBulletEnemy);
+
+	// попадание в игрока
+	inter.hittingPlayer = setInterval(() => {
+		let bullets = document.querySelectorAll('.shotEnemy');
+		// координаты игрока
+		const playerPosTop = player.el.getBoundingClientRect().top,
+		playerPosRight = player.el.getBoundingClientRect().right,
+		playerPosBottom = player.el.getBoundingClientRect().bottom,
+		playerPosLeft = player.el.getBoundingClientRect().left;
+		bullets.forEach (bullet => {
+			if (
+				bullet.getBoundingClientRect().top < playerPosBottom &&
+				bullet.getBoundingClientRect().bottom > playerPosTop &&
+				bullet.getBoundingClientRect().right > playerPosLeft &&
+				bullet.getBoundingClientRect().left < playerPosRight
+			) {
+				bullet.parentNode.removeChild(bullet);
+				nextStart();
+			} 
+		});
+	}, fps);
 };
 
 // ф-ция рандомного создания числа в диапазоне от min до max
@@ -265,21 +368,44 @@ function startGame() {
 	intervals();
 };
 
-// После убийства player запускается ф-ция которая заново все добавляет (удаляет всех врагов, пули, плеера)
+// После убийства player запускается ф-ция которая заново все добавляет (удаляет всех врагов, все пули, игрока)
 function nextStart() {
-	clearInterval(inter.enemy);
 	clearInterval(inter.run);
 	clearInterval(inter.bullet);
+	clearInterval(inter.bulletEnemy);
+	clearInterval(inter.enemy);
 	clearInterval(inter.addRandomEnemy);
+	clearInterval(inter.enemyShot);
+	clearInterval(inter.hittingPlayer);
 
-	const enemies = document.querySelectorAll('.enemy')
+	const enemies = document.querySelectorAll('.enemy');
 	enemies.forEach(curPosEnemy => {
 		curPosEnemy.parentNode.removeChild(curPosEnemy);
 	});
 
-	player.el.parentNode.removeChild(player.el);
+	const bulets = document.querySelectorAll('.shot');
+	bulets.forEach(bulet => {
+		bulet.parentNode.removeChild(bulet);
+	});
 
+	const buletsEnemy = document.querySelectorAll('.shotEnemy');
+	buletsEnemy.forEach(bulet => {
+		bulet.parentNode.removeChild(bulet);
+	});
+
+	player.el.parentNode.removeChild(player.el);
+	player.hp -= 1;
+
+	switch(player.hp) {
+		case 2:
+			document.querySelector('.heartThree').src = "img/heart3.png";
+			break;
+		case 1:
+			document.querySelector('.heartTwo').src = "img/heart3.png";
+			break;
+	}
 	if (player.hp === 0) {
+		document.querySelector('.heartOne').src = "img/heart3.png";
 		return gameOver();
 	}
 	startGame();
@@ -287,13 +413,27 @@ function nextStart() {
 
 // Конец Игры
 function gameOver() {
-	document.querySelector('.heartOne').src = "img/heart3.png";
+	clearInterval(inter.run);
+	clearInterval(inter.bullet);
+	clearInterval(inter.bulletEnemy);
+	clearInterval(inter.enemy);
+	clearInterval(inter.addRandomEnemy);
+	clearInterval(inter.enemyShot);
+	clearInterval(inter.hittingPlayer);
+	const bulets = document.querySelectorAll('.shot');
+	bulets.forEach(bulet => {
+		bulet.parentNode.removeChild(bulet);
+	});
 	document.querySelector('.game__over').classList.remove('noneDisplay');
 }
 
 
 const gameZone = document.querySelector('.game-zone');
 const fps = 1000 / 60;
+// время добавления танка
+const timeAddEnemy = 2000;
+// скорость пули
+const timeFlyBulletEnemy = 2000;
 let counter = 0;
 
 const player = {
@@ -323,8 +463,11 @@ const bulletFly = {
 const inter = {
 	run: false,
 	bullet: false,
+	bulletEnemy: false,
 	enemy: false,
 	addRandomEnemy: false,
+	enemyShot: false,
+	hittingPlayer: false,
 };
 
 startGame();

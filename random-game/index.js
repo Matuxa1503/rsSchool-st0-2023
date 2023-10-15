@@ -187,7 +187,6 @@ function intervals() {
 	inter.enemy = setInterval(() => {
 		let enemyTank = document.querySelectorAll('.enemy');
 		enemyTank.forEach(curPosEnemy => {
-
 			// направление движения противника и движение до края экрана
 			let direction = curPosEnemy.getAttribute('direction');
 			
@@ -253,11 +252,11 @@ function intervals() {
 					bullet.getBoundingClientRect().right > enemyPosLeft &&
 					bullet.getBoundingClientRect().left < enemyPosRight
 				) {
-					curPosEnemy.parentNode.removeChild(curPosEnemy);
 					bullet.parentNode.removeChild(bullet);
-					counter++;
+					curPosEnemy.parentNode.removeChild(curPosEnemy);
+					counter += 1;
 					document.querySelector('.counter').textContent = counter;
-				} 
+				}
 			});
 		});
 	}, fps);
@@ -424,16 +423,73 @@ function gameOver() {
 	bulets.forEach(bulet => {
 		bulet.parentNode.removeChild(bulet);
 	});
-	document.querySelector('.game__over').classList.remove('noneDisplay');
+
+	const gameOver = document.querySelector('.game__over'),
+	gameStatus = document.querySelector('.game__status'),
+	namePlayer = document.querySelector('.game__name'),
+	gameHeartPlayer = document.querySelector('.game__heart'),
+	finishCounter = document.querySelector('.finishCounter');
+	
+	gameStatus.classList.add('noneDisplay');
+	gameHeartPlayer.classList.add('noneDisplay');
+	gameOver.classList.remove('noneDisplay');
+	finishCounter.textContent += counter;
+
+// local storage
+	const arrPlayers = [];
+	let curNum = 1;
+
+	function User (num, name, difficult, counter) {
+		this.num = num,
+		this.name = name,
+		this.difficult = difficult,
+		this.counter = counter;
+	}
+
+	if (localStorage.length > 0) {
+		arrPlayers.push(...JSON.parse(localStorage.getItem('users')));
+		curNum = JSON.parse(localStorage.getItem('number')) + 1;
+	}
+
+	if (arrPlayers.length < 10) {
+		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(12), player.difficultLevel, counter));
+		localStorage.setItem('users', JSON.stringify(arrPlayers));
+		localStorage.setItem('number', JSON.stringify(curNum));
+	} else {
+		arrPlayers.shift();
+		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(12), player.difficultLevel, counter))
+		localStorage.setItem('users', JSON.stringify(arrPlayers));
+		localStorage.setItem('number', JSON.stringify(curNum));
+	}
+
+	// Таблица результатов
+	const tableCounter = document.querySelector('.tableCounter > tbody');
+
+	const players = [...JSON.parse(localStorage.getItem('users'))];
+	players.reverse().forEach(item => {
+		let tr = document.createElement('tr');
+		tr.innerHTML = `<td>${item.num}</td><td>${item.name}</td><td>${item.difficult}</td><td>${item.counter}</td>`;
+		tableCounter.append(tr);
+	})
+
+// клик на кнопку после надписи game over
+	document.querySelector('.game__over-btn').addEventListener('click', () => {
+		const gameStartMenu = document.querySelector('.game__start');
+		const footer = document.querySelector('footer');
+		gameOver.classList.add('noneDisplay');
+		gameStartMenu.classList.remove('noneDisplay');
+		footer.classList.remove('noneDisplay');
+		location.reload();
+	});
 }
 
 
 const gameZone = document.querySelector('.game-zone');
 const fps = 1000 / 60;
 // время добавления танка
-const timeAddEnemy = 2000;
+let timeAddEnemy = 2000;
 // скорость пули
-const timeFlyBulletEnemy = 2000;
+let timeFlyBulletEnemy = 1500;
 let counter = 0;
 
 const player = {
@@ -453,6 +509,7 @@ const player = {
 	width: 78,
 	height: 77,
 	hp: 3,
+	difficultLevel: 'easy',
 };
 
 const bulletFly = {
@@ -470,4 +527,47 @@ const inter = {
 	hittingPlayer: false,
 };
 
-startGame();
+// Начальное меню
+const namePlayer = document.querySelector('.game__name'),
+inputName = document.querySelector('.input-name'),
+gameStartMenu = document.querySelector('.game__start'),
+gameStatus = document.querySelector('.game__status'),
+gameHeartPlayer = document.querySelector('.game__heart'),
+footer = document.querySelector('footer'),
+ulLevels = document.querySelector('.game__levels');
+
+// Выбор уровня сложности
+ulLevels.addEventListener('click', (e) => {
+	document.querySelectorAll('.levels__item').forEach(item => item.classList.remove('activeLevel'));
+	switch(e.target.type) {
+		case 'easy':
+			e.target.classList.add('activeLevel');
+			timeAddEnemy = 2000;
+			timeFlyBulletEnemy = 1500;
+			player.difficultLevel = 'easy';
+			break;
+		case 'medium':
+			e.target.classList.add('activeLevel');
+			timeAddEnemy = 1000;
+			timeFlyBulletEnemy = 1000;
+			player.difficultLevel = 'medium';
+			break;
+		case 'hard':
+			e.target.classList.add('activeLevel');
+			timeAddEnemy = 500;
+			timeFlyBulletEnemy = 500;
+			player.difficultLevel = 'hard';
+			break;
+	};
+})
+
+document.querySelector('.game__form').addEventListener('submit', (e) => {
+	e.preventDefault();
+	namePlayer.textContent += inputName.value;
+	inputName.value = '';
+	gameStartMenu.classList.add('noneDisplay');
+	gameStatus.classList.remove('noneDisplay');
+	gameHeartPlayer.classList.remove('noneDisplay');
+	footer.classList.add('noneDisplay');
+	startGame();
+});

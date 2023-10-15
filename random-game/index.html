@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Pixelify+Sans:regular,700" rel="stylesheet"/>
+	<link rel="icon" type="image/png" href="img/enemy-right.png">
+	<script src="https://kit.fontawesome.com/1231ac999c.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="style.css">
 	<script defer src="index.js"></script>
 	<title>Tanks Game</title>
@@ -11,13 +13,31 @@
 <body>
 	<div class="game-zone">
 
-		<div class="game__status">
-			<div class="game__info">
-				<div class="game__name">Имя Игрока: Андрей</div>
-				<div class="game__counter">Cчёт:<span class="counter">0</span></div>
-			</div>
+		<div class="game__start">
+			<h1 class="game__name__form">Tanks Game</h1>
+			<p class="game__task">Приветствую боец! Твоя задача уничтожить максимально возможное количество танков и сражаться до последнего! Удачи!</p>
+			<p class="game__direction">Движение: <img src="img/arrow.png" style="transform: rotate(-90deg)" alt=""> <img src="img/arrow.png" alt=""> <img src="img/arrow.png" style="transform: rotate(90deg)" alt=""> <img src="img/arrow.png" style="transform: rotate(180deg)" alt=""></p>
+			<p class="game__shotKeydown">Выстрел: <b>Space</b></p>
+			<form class="game__form" action="#">
+				<p class="game__userName">Имя Бойца:</p>
+				<input class="input-name" type="text" placeholder="Вводи сюда">
+				<p class="game__title__levels">Выберите уровень</p>
+				<ul class="game__levels">
+					<li class="levels__item activeLevel" type="easy">Easy</li>
+					<li class="levels__item" type="medium">Medium</li>
+					<li class="levels__item" type="hard">Hard</li>
+				</ul>
+				<button class="submit-name" type="submit">Start</button>
+			</form>
+		</div>
 
-			<div class="game__heart">
+		<div class="game__status noneDisplay">
+			<div class="game__info">
+				<div class="game__name">Имя Бойца: </div>
+				<div class="game__counter">Cчёт:<span class="counter">0</span></div>
+			</div> 
+
+			<div class="game__heart noneDisplay">
 				<img src="img/heart1.png" alt="" class="heartOne">
 				<img src="img/heart1.png" alt="" class="heart heartTwo">
 				<img src="img/heart1.png" alt="" class="heart heartThree">
@@ -26,11 +46,33 @@
 
 		<div class="game__over noneDisplay">
 			<p>Game Over</p>
-			<button>Click for restart</button>
+			<span class="finishCounter">Ваш счет: </span>
+			<table class="tableCounter">
+				<tr>
+					<td><b>№</b></td>
+					<td><b>Имя бойца</b></td>
+					<td><b>Сложность</b></td>
+					<td><b>Очки</b></td>
+				</tr>
+			</table>
+			<button class="game__over-btn">Click for restart</button>
 		</div>
 	</div>
 
-
-	
+	<footer>
+		<div class="container">
+			<div class="footer__content">
+				<div class="footer__wrapper">
+					<a href="https://github.com/Matuxa1503" target="_blank">
+						<div class="github"><i class="fa-brands fa-github"></i></div>
+					</a>
+					<div class="year">2023</div>
+					<a href="https://rs.school/js-stage0/" target="_blank">
+						<img class="school" src="img/rs_school.png" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

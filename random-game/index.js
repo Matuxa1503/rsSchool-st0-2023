@@ -446,18 +446,18 @@ function gameOver() {
 		this.counter = counter;
 	}
 
-	if (localStorage.length > 0) {
+	if (localStorage.getItem('users')) {
 		arrPlayers.push(...JSON.parse(localStorage.getItem('users')));
 		curNum = JSON.parse(localStorage.getItem('number')) + 1;
 	}
 
 	if (arrPlayers.length < 10) {
-		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(12), player.difficultLevel, counter));
+		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(11), player.difficultLevel, counter));
 		localStorage.setItem('users', JSON.stringify(arrPlayers));
 		localStorage.setItem('number', JSON.stringify(curNum));
 	} else {
 		arrPlayers.shift();
-		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(12), player.difficultLevel, counter))
+		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(11), player.difficultLevel, counter))
 		localStorage.setItem('users', JSON.stringify(arrPlayers));
 		localStorage.setItem('number', JSON.stringify(curNum));
 	}

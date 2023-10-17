@@ -36,7 +36,6 @@ function controllers() {
 					break;
 			}
 		}
-		
 	});
 
 // Отслеживание отжатия кнопки
@@ -360,6 +359,46 @@ function randomInteger(min, max) {
 	return Math.round(nums);
 }
 
+// Начальное меню
+function startMenu() {
+	// Выбор уровня сложности
+	ulLevels.addEventListener('click', (e) => {
+		document.querySelectorAll('.levels__item').forEach(item => item.classList.remove('activeLevel'));
+		switch (e.target.type) {
+			case 'easy':
+				e.target.classList.add('activeLevel');
+				timeAddEnemy = 2000;
+				timeFlyBulletEnemy = 1500;
+				player.difficultLevel = 'easy';
+				break;
+			case 'medium':
+				e.target.classList.add('activeLevel');
+				timeAddEnemy = 1000;
+				timeFlyBulletEnemy = 1000;
+				player.difficultLevel = 'medium';
+				break;
+			case 'hard':
+				e.target.classList.add('activeLevel');
+				timeAddEnemy = 500;
+				timeFlyBulletEnemy = 500;
+				player.difficultLevel = 'hard';
+				break;
+		};
+	});
+
+	// Нажатие на кнопку старт
+	document.querySelector('.game__form').addEventListener('submit', (e) => {
+		e.preventDefault();
+		namePlayer.textContent += inputName.value;
+		inputName.value = '';
+		gameStartMenu.classList.add('noneDisplay');
+		gameStatus.classList.remove('noneDisplay');
+		gameHeartPlayer.classList.remove('noneDisplay');
+		footer.classList.add('noneDisplay');
+		startGame();
+	});
+};
+
 // ф-ции запуска игры и рестарта
 function startGame() {
 	initPlayer();
@@ -410,6 +449,42 @@ function nextStart() {
 	startGame();
 }
 
+	// Хранение данных в local storage и вывод их в таблице
+function infoLocalStorage() {
+	if (localStorage.getItem('users')) {
+		arrPlayers.push(...JSON.parse(localStorage.getItem('users')));
+		curNumGame = JSON.parse(localStorage.getItem('number')) + 1;
+	}
+
+	function User(num, name, difficult, counter) {
+		this.num = num,
+			this.name = name,
+			this.difficult = difficult,
+			this.counter = counter;
+	}
+
+	// отображение в таблице последних 10 игр
+	if (arrPlayers.length < 10) {
+		arrPlayers.push(new User(curNumGame, namePlayer.textContent.slice(11), player.difficultLevel, counter));
+		localStorage.setItem('users', JSON.stringify(arrPlayers));
+		localStorage.setItem('number', JSON.stringify(curNumGame));
+	} else {
+		arrPlayers.shift();
+		arrPlayers.push(new User(curNumGame, namePlayer.textContent.slice(11), player.difficultLevel, counter))
+		localStorage.setItem('users', JSON.stringify(arrPlayers));
+		localStorage.setItem('number', JSON.stringify(curNumGame));
+	}
+
+	// Таблица результатов
+	const tableCounter = document.querySelector('.tableCounter > tbody');
+	const players = [...JSON.parse(localStorage.getItem('users'))];
+	players.reverse().forEach(item => {
+		let tr = document.createElement('tr');
+		tr.innerHTML = `<td>${item.num}</td><td>${item.name}</td><td>${item.difficult}</td><td>${item.counter}</td>`;
+		tableCounter.append(tr);
+	})
+}
+
 // Конец Игры
 function gameOver() {
 	clearInterval(inter.run);
@@ -419,15 +494,13 @@ function gameOver() {
 	clearInterval(inter.addRandomEnemy);
 	clearInterval(inter.enemyShot);
 	clearInterval(inter.hittingPlayer);
+	
 	const bulets = document.querySelectorAll('.shot');
 	bulets.forEach(bulet => {
 		bulet.parentNode.removeChild(bulet);
 	});
 
 	const gameOver = document.querySelector('.game__over'),
-	gameStatus = document.querySelector('.game__status'),
-	namePlayer = document.querySelector('.game__name'),
-	gameHeartPlayer = document.querySelector('.game__heart'),
 	finishCounter = document.querySelector('.finishCounter');
 	
 	gameStatus.classList.add('noneDisplay');
@@ -435,47 +508,10 @@ function gameOver() {
 	gameOver.classList.remove('noneDisplay');
 	finishCounter.textContent += counter;
 
-// local storage
-	const arrPlayers = [];
-	let curNum = 1;
+	infoLocalStorage()
 
-	function User (num, name, difficult, counter) {
-		this.num = num,
-		this.name = name,
-		this.difficult = difficult,
-		this.counter = counter;
-	}
-
-	if (localStorage.getItem('users')) {
-		arrPlayers.push(...JSON.parse(localStorage.getItem('users')));
-		curNum = JSON.parse(localStorage.getItem('number')) + 1;
-	}
-
-	if (arrPlayers.length < 10) {
-		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(11), player.difficultLevel, counter));
-		localStorage.setItem('users', JSON.stringify(arrPlayers));
-		localStorage.setItem('number', JSON.stringify(curNum));
-	} else {
-		arrPlayers.shift();
-		arrPlayers.push(new User(curNum, namePlayer.textContent.slice(11), player.difficultLevel, counter))
-		localStorage.setItem('users', JSON.stringify(arrPlayers));
-		localStorage.setItem('number', JSON.stringify(curNum));
-	}
-
-	// Таблица результатов
-	const tableCounter = document.querySelector('.tableCounter > tbody');
-
-	const players = [...JSON.parse(localStorage.getItem('users'))];
-	players.reverse().forEach(item => {
-		let tr = document.createElement('tr');
-		tr.innerHTML = `<td>${item.num}</td><td>${item.name}</td><td>${item.difficult}</td><td>${item.counter}</td>`;
-		tableCounter.append(tr);
-	})
-
-// клик на кнопку после надписи game over
+	// клик на кнопку после надписи game over
 	document.querySelector('.game__over-btn').addEventListener('click', () => {
-		const gameStartMenu = document.querySelector('.game__start');
-		const footer = document.querySelector('footer');
 		gameOver.classList.add('noneDisplay');
 		gameStartMenu.classList.remove('noneDisplay');
 		footer.classList.remove('noneDisplay');
@@ -484,14 +520,31 @@ function gameOver() {
 }
 
 
-const gameZone = document.querySelector('.game-zone');
+const gameZone = document.querySelector('.game-zone'),
+namePlayer = document.querySelector('.game__name'),
+ulLevels = document.querySelector('.game__levels'),
+inputName = document.querySelector('.input-name'),
+gameStartMenu = document.querySelector('.game__start'),
+gameStatus = document.querySelector('.game__status'),
+gameHeartPlayer = document.querySelector('.game__heart'),
+footer = document.querySelector('footer');
+
 const fps = 1000 / 60;
+
 // время добавления танка
 let timeAddEnemy = 2000;
+
 // скорость пули
 let timeFlyBulletEnemy = 1500;
+
+// количество очков
 let counter = 0;
 
+// массив игроков и номер текущей игры (таблица)
+const arrPlayers = [];
+let curNumGame = 1;
+
+// игрок
 const player = {
 	posPlayerImg: {
 		top: 'img/player-top.png',
@@ -527,47 +580,9 @@ const inter = {
 	hittingPlayer: false,
 };
 
-// Начальное меню
-const namePlayer = document.querySelector('.game__name'),
-inputName = document.querySelector('.input-name'),
-gameStartMenu = document.querySelector('.game__start'),
-gameStatus = document.querySelector('.game__status'),
-gameHeartPlayer = document.querySelector('.game__heart'),
-footer = document.querySelector('footer'),
-ulLevels = document.querySelector('.game__levels');
+startMenu();
 
-// Выбор уровня сложности
-ulLevels.addEventListener('click', (e) => {
-	document.querySelectorAll('.levels__item').forEach(item => item.classList.remove('activeLevel'));
-	switch(e.target.type) {
-		case 'easy':
-			e.target.classList.add('activeLevel');
-			timeAddEnemy = 2000;
-			timeFlyBulletEnemy = 1500;
-			player.difficultLevel = 'easy';
-			break;
-		case 'medium':
-			e.target.classList.add('activeLevel');
-			timeAddEnemy = 1000;
-			timeFlyBulletEnemy = 1000;
-			player.difficultLevel = 'medium';
-			break;
-		case 'hard':
-			e.target.classList.add('activeLevel');
-			timeAddEnemy = 500;
-			timeFlyBulletEnemy = 500;
-			player.difficultLevel = 'hard';
-			break;
-	};
-})
 
-document.querySelector('.game__form').addEventListener('submit', (e) => {
-	e.preventDefault();
-	namePlayer.textContent += inputName.value;
-	inputName.value = '';
-	gameStartMenu.classList.add('noneDisplay');
-	gameStatus.classList.remove('noneDisplay');
-	gameHeartPlayer.classList.remove('noneDisplay');
-	footer.classList.add('noneDisplay');
-	startGame();
-});
+
+
+

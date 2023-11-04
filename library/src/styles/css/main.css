@@ -750,6 +750,7 @@ a, a:visited {
   display: flex;
   flex-wrap: wrap;
   gap: 40px 257px;
+  margin-right: 20px;
 }
 
 .noneDisplay {
@@ -1012,10 +1013,6 @@ a, a:visited {
   padding: 10px 40px;
   transition: 0.3s;
 }
-.libraryCard__form-btn:hover {
-  border-color: #BB945F;
-  background-color: #BB945F;
-}
 
 .libraryCard__info {
   display: flex;
@@ -1127,6 +1124,18 @@ a, a:visited {
   letter-spacing: 2px;
 }
 
+@media (hover: hover) {
+  .libraryCard__form-btn:hover {
+    border-color: #BB945F;
+    background-color: #BB945F;
+  }
+}
+@media (hover: none) {
+  .libraryCard__form-btn:active {
+    border-color: #BB945F;
+    background-color: #BB945F;
+  }
+}
 @media screen and (max-width: 1400px) {
   .about__slider {
     width: 900px;
@@ -1140,10 +1149,10 @@ a, a:visited {
   }
   .favorites__books {
     justify-content: space-between;
-    gap: 40px 0;
+    gap: 40px 45px;
   }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1215px) {
   .favorites__books {
     gap: 40px 60px;
     justify-content: center;
@@ -1243,6 +1252,9 @@ a, a:visited {
     top: 0;
     z-index: 100;
     width: 100%;
+  }
+  .favorites__book__btn:active {
+    color: #BB945F;
   }
   .coffeShop__paragraph {
     margin-bottom: 6%;

@@ -1,3 +1,19 @@
+//hover эффекты на странице desktop
+@media(hover: hover) {
+	.libraryCard__form-btn:hover {
+			border-color: #BB945F;
+			background-color: #BB945F;
+	}
+}
+
+// медиа отменяющий hover и добавление active для всех кнопок
+@media(hover: none) {
+	.libraryCard__form-btn:active {
+		border-color: #BB945F;
+		background-color: #BB945F;
+	}
+}
+
 @media screen and (max-width: 1400px) {
 	.about {
 		&__slider {
@@ -16,17 +32,17 @@
 
 	.favorites__books {
 		justify-content: space-between;
-		gap: 40px 0;
+		gap: 40px 45px;
 	}
 } // end media 1400px
 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1215px) {
 	.favorites__books {
 		gap: 40px 60px;
 		justify-content: center;
 	}
-}// end media 1200px
+}// end media 1215px
 
 
 @media screen and (max-width: 1024px) {
@@ -145,6 +161,10 @@
 			z-index: 100;  
 			width: 100%;  
 		}
+
+		&__book__btn:active {
+			color: #BB945F;
+		}
 	}
 
 	.coffeShop {
@@ -200,6 +220,10 @@
 		&__login-paragraph {
 			max-width: 600px;
 			margin-bottom: 6.5%;
+		}
+
+		&__afterLogin {
+			text-align: center;
 		}
 	}
 
